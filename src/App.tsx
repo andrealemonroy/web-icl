@@ -13,6 +13,7 @@ import LeyDeMarcoLegal from './pages/marco-legal';
 import GestionAdministrativa from './pages/gestion-administrativa';
 import Proyectos from './pages/proyectos';
 import ICLCapacitaciones from './pages/capacitaciones';
+import ContactPage from './pages/contacto';
 
 function App() {
   return (
@@ -128,6 +129,7 @@ function App() {
           />
           <Route path="/proyectos" element={<Proyectos />} />
           <Route path="/icl-capacitaciones" element={<ICLCapacitaciones />} />
+          <Route path='/contacto' element={<ContactPage />} />
         </Routes>
       </Router>
     </Provider>
