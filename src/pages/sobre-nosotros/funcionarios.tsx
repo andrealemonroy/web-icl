@@ -13,7 +13,9 @@ export interface Funcionario {
 
 export default function Funcionarios() {
   const [openMenu, setOpenMenu] = React.useState(false);
-  const { data: funcionarios } = useGetFuncionariosQuery('autorizado=1&activo=1');
+  const { data: funcionarios } = useGetFuncionariosQuery(
+    'autorizado=1&activo=1'
+  );
   if (!funcionarios) {
     return <div>Loading...</div>;
   }
