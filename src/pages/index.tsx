@@ -11,6 +11,7 @@ import WhatsAppButton from '../components/WhatsappButton';
 import { useGetPopupQuery } from '../redux/reduxQuery/popup';
 import Modal from '../components/Modal';
 import { Link, useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 export default function Home() {
   const { data: popupData } = useGetPopupQuery('autorizado=1&activo=1');
@@ -44,6 +45,27 @@ export default function Home() {
 
   return (
     <div className="overflow-x-hidden">
+      <Helmet>
+        <title>Inicio - Instituto Catastral de Lima</title>
+        <meta
+          name="description"
+          content="Descubre cómo el Instituto Catastral de Lima promueve el desarrollo urbano sostenible y planificado en la ciudad. Información sobre servicios, proyectos y más."
+        />
+        <meta
+          property="og:title"
+          content="Inicio - Instituto Catastral de Lima"
+        />
+        <meta
+          property="og:description"
+          content="Descubre cómo el Instituto Catastral de Lima promueve el desarrollo urbano sostenible y planificado en la ciudad. Información sobre servicios, proyectos y más."
+        />
+        <meta
+          property="og:image"
+          content="URL de una imagen representativa de tu página"
+        />
+        <meta name="twitter:card" content="summary_large_image" />
+        {/* Puedes añadir más meta tags según sea necesario */}
+      </Helmet>
       <Layout setOpenMenu={setOpenMenu} openMenu={openMenu}>
         <Banner
           setOpenMenu={setOpenMenu}
