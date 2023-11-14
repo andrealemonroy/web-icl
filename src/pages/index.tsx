@@ -212,7 +212,7 @@ export default function Home() {
                           className="rounded-md"
                         />
                         <div className="text-lg font-lato font-extrabold text-primary">
-                          Consulta Catastral en Línea
+                          Consulta Catastral
                         </div>
                       </div>
                       {/* <div className="text-slate-400 mb-4">
@@ -276,7 +276,7 @@ export default function Home() {
                           className="rounded-md"
                         />
                         <div className="text-lg font-lato font-extrabold text-primary">
-                          Portafolio de Aplicaciones GIS
+                          Aplicaciones GIS
                         </div>
                       </div>
                       {/* <div className="text-slate-400 mb-4">
@@ -309,7 +309,7 @@ export default function Home() {
                           className="rounded-md"
                         />
                         <div className="text-lg font-lato font-extrabold text-primary">
-                          Mesa de Partes Virtual
+                          Mesa de Partes
                         </div>
                       </div>
                       {/* <div className="text-slate-400 mb-4">

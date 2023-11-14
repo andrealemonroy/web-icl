@@ -73,7 +73,7 @@ export const resources = [
     link: 'https://sit.icl.gob.pe/conoce_lima/',
   },
   {
-    title: 'Consulta Catastral en Línea',
+    title: 'Consulta Catastral',
     description:
       'Permite a los usuarios obtener detalles específicos sobre propiedades en Lima, como ubicación y dimensiones.',
     buttonText: 'Realizar Consulta',
@@ -89,7 +89,7 @@ export const resources = [
     link: 'https://sit.icl.gob.pe/sit/',
   },
   {
-    title: 'Portafolio de Aplicaciones GIS',
+    title: 'Aplicaciones GIS',
     description:
       'Herramientas y aplicaciones que facilitan el análisis espacial y la visualización de datos georreferenciados.',
     buttonText: 'Explorar Aplicaciones',
@@ -97,7 +97,7 @@ export const resources = [
     link: 'https://sit.icl.gob.pe/portafolio/',
   },
   {
-    title: 'Mesa de Partes Virtual',
+    title: 'Mesa de Partes',
     description:
       'Facilita la presentación de documentos y la realización de trámites administrativos de manera virtual.',
     buttonText: 'Iniciar Trámite',
@@ -868,8 +868,8 @@ export const categoriesMegamenu = [
       },
       {
         id: 11,
-        name: 'Consulta Catastral en Línea',
-        slug: 'consulta-catastral-en-linea',
+        name: 'Consulta Catastral',
+        slug: 'consulta-catastral',
         children: [],
         description:
           'Accede rápidamente a información catastral detallada y actualizada, facilitando la gestión y planificación urbana desde la comodidad de tu hogar u oficina.',
@@ -877,7 +877,7 @@ export const categoriesMegamenu = [
       },
       {
         id: 12,
-        name: 'Portafolio de Aplicaciones GIS',
+        name: 'Aplicaciones GIS',
         slug: 'portafolio-de-aplicaciones-gis',
         children: [],
         description:
@@ -895,8 +895,8 @@ export const categoriesMegamenu = [
       },
       {
         id: 15,
-        name: 'Mesa de Partes Virtual',
-        slug: 'mesa-de-partes-virtual',
+        name: 'Mesa de Partes',
+        slug: 'mesa-de-partes',
         children: [],
         description:
           'Realiza trámites administrativos en línea, enviando documentos y solicitudes de manera eficiente y segura desde cualquier lugar.',
