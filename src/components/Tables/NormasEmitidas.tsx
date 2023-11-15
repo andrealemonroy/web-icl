@@ -12,6 +12,7 @@ import {
   useGetTiposDocumentoQuery,
 } from '../../redux/reduxQuery/utils';
 import { forEach } from 'lodash';
+import { returnLinkPDFFromBuffer } from '../../utils/showImageBuffer';
 
 const NormasEmitidas = () => {
   const form = useForm();
@@ -60,7 +61,7 @@ const NormasEmitidas = () => {
       }
     });
     data.autorizado = 1;
-    data.activo=1;
+    data.activo = 1;
     const params = new URLSearchParams(data).toString();
     setParams(params);
     refetchNormasEmitidas();
@@ -174,20 +175,26 @@ const NormasEmitidas = () => {
           {
             Header: 'Ver documento',
             Cell: ({ row }: any) => (
-              <div className="flex items-center">
-                {row.original.url_documento_resolucion === '' ? (
-                  <span className="text-sm font-medium ">No hay documento</span>
+              <div className="flex items-center w-full">
+                {row.original.url_documento ||
+                row.original.contenido_documento ? (
+                  <div className="flex items-center">
+                    <Button
+                      onClick={() =>
+                        window.open(
+                          row.original.url_documento ||
+                            returnLinkPDFFromBuffer(
+                              row.original.contenido_documento
+                            ),
+                          '_blank'
+                        )
+                      }
+                    >
+                      Ver documento
+                    </Button>
+                  </div>
                 ) : (
-                  <Button
-                    onClick={() =>
-                      window.open(
-                        row.original.url_documento_resolucion,
-                        '_blank'
-                      )
-                    }
-                  >
-                    Ver documento
-                  </Button>
+                  <span className="text-sm font-medium ">No hay documento</span>
                 )}
               </div>
             ),
