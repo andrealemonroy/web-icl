@@ -4,6 +4,7 @@ import { SectionBanner } from '../../components/SectionBanner';
 import { Table } from '../../components/Table';
 import { useGetNormasQuery } from '../../redux/reduxQuery/normas';
 import { Button } from '../../components/Button';
+import { returnLinkPDFFromBuffer } from '../../utils/showImageBuffer';
 
 const NormasDeLaInstitucion = () => {
   const {
@@ -55,20 +56,32 @@ Estas normas son la base de nuestro compromiso con la excelencia y el servicio a
                     : window.innerWidth > 1800
                     ? window.innerWidth * 0.15
                     : 200,
-                Cell: ({ row }: any) =>
-                  row.original.url_norma === '' ? (
-                    <span className="text-sm font-medium ">
-                      No hay documento
-                    </span>
-                  ) : (
-                    <Button
-                      onClick={() =>
-                        window.open(row.original.url_norma, '_blank')
-                      }
-                    >
-                      Ver documento
-                    </Button>
-                  ),
+                Cell: ({ row }: any) => (
+                  <div className="flex items-center w-full">
+                    {row.original.url_documento ||
+                    row.original.contenido_documento ? (
+                      <div className="flex items-center">
+                        <Button
+                          onClick={() =>
+                            window.open(
+                              row.original.url_documento ||
+                                returnLinkPDFFromBuffer(
+                                  row.original.contenido_documento
+                                ),
+                              '_blank'
+                            )
+                          }
+                        >
+                          Ver documento
+                        </Button>
+                      </div>
+                    ) : (
+                      <span className="text-sm font-medium ">
+                        No hay documento
+                      </span>
+                    )}
+                  </div>
+                ),
               },
             ]}
             data={normasData}
