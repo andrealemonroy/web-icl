@@ -3,6 +3,7 @@ import CardFuncionario from '../../components/CardFuncionario';
 import { SectionBanner } from '../../components/SectionBanner';
 import { Layout } from '../../components/Layout';
 import { useGetFuncionariosQuery } from '../../redux/reduxQuery/funcionarios';
+import Loader from '../../components/Loader';
 
 export interface Funcionario {
   image: string;
@@ -17,7 +18,7 @@ export default function Funcionarios() {
     'autorizado=1&activo=1'
   );
   if (!funcionarios) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
   return (
     <Layout openMenu={openMenu} setOpenMenu={setOpenMenu}>

@@ -3,13 +3,14 @@ import { Button } from '../components/Button';
 import { Layout } from '../components/Layout';
 import { SectionBanner } from '../components/SectionBanner';
 import { useGetCursosQuery } from '../redux/reduxQuery/cursos';
+import Loader from '../components/Loader';
 
 export default function ICLCapacitaciones() {
   const [openMenu, setOpenMenu] = useState(false);
   const { data: cursosData } = useGetCursosQuery('autorizado=1&activo=1');
 
   if (!cursosData) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
   const arrayBufferToBase64 = (buffer: any) => {
     let binary = '';

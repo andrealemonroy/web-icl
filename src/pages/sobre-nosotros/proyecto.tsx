@@ -4,6 +4,7 @@ import { Layout } from '../../components/Layout';
 import { SectionBanner } from '../../components/SectionBanner';
 import { useGetProyectoQuery } from '../../redux/reduxQuery/proyectos';
 import { useLocation, useNavigate } from 'react-router-dom';
+import Loader from '../../components/Loader';
 
 export default function Proyecto() {
   const [openMenu, setOpenMenu] = React.useState(false);
@@ -13,7 +14,7 @@ export default function Proyecto() {
   const { data: project } = useGetProyectoQuery(id);
 
   if (!project) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   const arrayBufferToBase64 = (buffer: any) => {

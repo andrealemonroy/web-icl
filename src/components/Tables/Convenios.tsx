@@ -13,6 +13,7 @@ import {
   useGetProviciasQuery,
 } from '../../redux/reduxQuery/departamentos';
 import { forEach } from 'lodash';
+import { returnLinkPDFFromBuffer } from '../../utils/showImageBuffer';
 
 const Convenios = () => {
   const form = useForm();
@@ -91,7 +92,6 @@ const Convenios = () => {
 
     refetchConvenios();
   });
-  
 
   return normasEmitidas ? (
     <>
@@ -229,14 +229,16 @@ const Convenios = () => {
             canFilter: false,
             Cell: ({ row }: any) => (
               <div className="flex items-center w-full">
-                {row.original.url_documento_convenio === '' ? (
-                  <span className="text-sm font-medium ">No hay documento</span>
-                ) : (
+                {row.original.url_documento ||
+                row.original.contenido_documento ? (
                   <div className="flex items-center">
                     <Button
                       onClick={() =>
                         window.open(
-                          row.original.url_documento_convenio,
+                          row.original.url_documento ||
+                            returnLinkPDFFromBuffer(
+                              row.original.contenido_documento
+                            ),
                           '_blank'
                         )
                       }
@@ -244,6 +246,8 @@ const Convenios = () => {
                       Ver documento
                     </Button>
                   </div>
+                ) : (
+                  <span className="text-sm font-medium ">No hay documento</span>
                 )}
               </div>
             ),
