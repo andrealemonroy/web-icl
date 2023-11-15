@@ -17,11 +17,11 @@ export const News: FC<NewsType> = ({
     .join(' ');
   return (
     <div className="sm:flex gap-4 border-2 border-primary rounded-md sm:h-64">
-      <div className="h-full w-full">
+      <div className="h-full w-fit">
         <img
           src={url_imagen_portada}
           alt="news"
-          className="rounded-t-sm sm:rounded-tr-none h-full"
+          className="rounded-t-sm sm:rounded-tr-none h-full w-full"
         />
       </div>
       <div className="flex flex-col justify-between sm:text-left text-center py-2 mr-2">

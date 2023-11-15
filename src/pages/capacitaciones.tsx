@@ -11,6 +11,17 @@ export default function ICLCapacitaciones() {
   if (!cursosData) {
     return <div>Loading...</div>;
   }
+  const arrayBufferToBase64 = (buffer: any) => {
+    let binary = '';
+    const bytes = [].slice.call(new Uint8Array(buffer));
+    bytes.forEach((b: any) => (binary += String.fromCharCode(b)));
+    return window.btoa(binary);
+  };
+  const showImageBuffer = (buffer: any) => {
+    const base64Flag = 'data:image/jpeg;base64,';
+    const imageStr = arrayBufferToBase64(buffer.data);
+    return base64Flag + imageStr;
+  };
   return (
     <Layout openMenu={openMenu} setOpenMenu={setOpenMenu}>
       <SectionBanner
@@ -25,12 +36,12 @@ export default function ICLCapacitaciones() {
             className="border border-primary rounded-md p-4 flex"
           >
             <img
-              src={capacitacion.image}
+              src={capacitacion.contenido_documento ? showImageBuffer(capacitacion.contenido_documento) : `/${capacitacion.url_documento}`}
               alt={capacitacion.title}
               width={200}
               height={200}
             />
-            <div className="flex flex-col justify-center gap-2">
+            <div className="flex flex-col justify-center gap-2 ml-4">
               <h2 className="font-acto text-2xl text-primary">
                 {capacitacion.title}
               </h2>

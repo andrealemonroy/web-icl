@@ -15,6 +15,8 @@ import Proyectos from './pages/proyectos';
 import ICLCapacitaciones from './pages/capacitaciones';
 import ContactPage from './pages/contacto';
 import Proyecto from './pages/sobre-nosotros/proyecto';
+import Noticias from './pages/noticias';
+import Noticia from './pages/noticias/item';
 
 function App() {
   return (
@@ -130,6 +132,8 @@ function App() {
           />
           <Route path="/proyectos" element={<Proyectos />} />
           <Route path="/proyectos/:id" element={<Proyecto />} />
+          <Route path='/noticias' element={<Noticias />} />
+          <Route path='/noticias/:id' element={<Noticia />} />
           <Route path="/icl-capacitaciones" element={<ICLCapacitaciones />} />
           <Route path='/contacto' element={<ContactPage />} />
         </Routes>

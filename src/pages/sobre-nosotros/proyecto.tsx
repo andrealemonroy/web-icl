@@ -6,9 +6,9 @@ import { useGetProyectoQuery } from '../../redux/reduxQuery/proyectos';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function Proyecto() {
+  const [openMenu, setOpenMenu] = React.useState(false);
   const router = useNavigate();
   const location = useLocation();
-  console.log(location);
   const id = location.pathname.split('/')[2];
   const { data: project } = useGetProyectoQuery(id);
 
@@ -16,8 +16,24 @@ export default function Proyecto() {
     return <div>Loading...</div>;
   }
 
+  const arrayBufferToBase64 = (buffer: any) => {
+    let binary = '';
+    const bytes = [].slice.call(new Uint8Array(buffer));
+    bytes.forEach((b: any) => (binary += String.fromCharCode(b)));
+    return window.btoa(binary);
+  };
+  const showImageBuffer = (buffer: any) => {
+    const base64Flag = 'data:image/jpeg;base64,';
+    const imageStr = arrayBufferToBase64(buffer.data);
+    return base64Flag + imageStr;
+  };
+
+  const image = project?.contenido_documento
+    ? showImageBuffer(project?.contenido_documento)
+    : `/${project?.url_documento}`;
+    
   return (
-    <Layout>
+    <Layout openMenu={openMenu} setOpenMenu={setOpenMenu}>
       <SectionBanner
         title="Proyectos"
         description="Desde desarrollos recientes hasta seminarios y talleres, aquí encontrarás todo lo que necesitas saber para estar al tanto de nuestras actividades."
@@ -34,7 +50,13 @@ export default function Proyecto() {
           height={500}
           className="rounded-md"
         /> */}
-        <img src={project.image} alt={project.title} className="rounded-md" width={500} height={500} />
+        <img
+          src={image}
+          alt={project.title}
+          className="rounded-md"
+          width={500}
+          height={500}
+        />
 
         <div
           className="font-lato my-4 leading-relaxed text-md"
