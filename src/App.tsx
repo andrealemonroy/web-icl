@@ -14,6 +14,7 @@ import GestionAdministrativa from './pages/gestion-administrativa';
 import Proyectos from './pages/proyectos';
 import ICLCapacitaciones from './pages/capacitaciones';
 import ContactPage from './pages/contacto';
+import Proyecto from './pages/sobre-nosotros/proyecto';
 
 function App() {
   return (
@@ -128,6 +129,7 @@ function App() {
             }
           />
           <Route path="/proyectos" element={<Proyectos />} />
+          <Route path="/proyectos/:id" element={<Proyecto />} />
           <Route path="/icl-capacitaciones" element={<ICLCapacitaciones />} />
           <Route path='/contacto' element={<ContactPage />} />
         </Routes>

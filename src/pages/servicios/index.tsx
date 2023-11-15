@@ -74,7 +74,7 @@ export default function Servicios({
       Promise.all(
         selectedItems.map((item: any) => {
           axios
-            .get(process.env.NEXT_PUBLIC_API_URL + '/calculoservicios', {
+            .get(process.env.REACT_APP_API_URL + '/calculoservicios', {
               params: {
                 metraje: data.metraje,
                 flag_construccion: data.construido.toUpperCase(),

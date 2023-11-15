@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-export const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4200";
+export const API_URL = process.env.REACT_APP_API_URL || "http://localhost:4200";
 
 const api = createApi({
   reducerPath: "api",
