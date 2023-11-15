@@ -8,6 +8,7 @@ import {
 import { Controller, useForm } from 'react-hook-form';
 import { CustomSelect } from '../Select';
 import { forEach } from 'lodash';
+import { returnLinkPDFFromBuffer } from '../../utils/showImageBuffer';
 
 const MemoriasInstitucionales = () => {
   const form = useForm();
@@ -79,26 +80,37 @@ const MemoriasInstitucionales = () => {
           {
             Header: 'Año',
             accessor: 'periodo_memoria',
+            width: 200
           },
           {
             Header: 'Descripción',
             accessor: 'descripcion_memoria',
-            width: 400,
+            width: 800,
           },
           {
             Header: 'Ver documento',
+            width: 200,
             Cell: ({ row }: any) => (
-              <div className="flex items-center">
-                {row.original.url_memoria === '' ? (
-                  <span className="text-sm font-medium ">No hay documento</span>
+              <div className="flex items-center w-full">
+                {row.original.url_documento ||
+                row.original.contenido_documento ? (
+                  <div className="flex items-center">
+                    <Button
+                      onClick={() =>
+                        window.open(
+                          row.original.url_documento ||
+                            returnLinkPDFFromBuffer(
+                              row.original.contenido_documento
+                            ),
+                          '_blank'
+                        )
+                      }
+                    >
+                      Ver documento
+                    </Button>
+                  </div>
                 ) : (
-                  <Button
-                    onClick={() =>
-                      window.open(row.original.url_memoria, '_blank')
-                    }
-                  >
-                    Ver documento
-                  </Button>
+                  <span className="text-sm font-medium ">No hay documento</span>
                 )}
               </div>
             ),
