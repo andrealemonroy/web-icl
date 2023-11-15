@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export const Footer = ({ openMenu, setOpenMenu }: any) => {
   return (
-    <div className="flex flex-col  bg-primary p-8 sm:p-10">
+    <div className="flex flex-col  bg-primary p-8 sm:py-10 sm:px-20">
       <div className="flex sm:flex-row flex-col justify-between gap-4">
         <div className="flex items-center sm:h-28">
           <img src="/images/footer/logo.svg" alt="logo" className="h-20" />
