@@ -43,6 +43,26 @@ export default function Home() {
     setIsClicked(index);
   };
 
+  const arrayBufferToBase64 = (buffer: any) => {
+    let binary = '';
+    const bytes = [].slice.call(new Uint8Array(buffer));
+    bytes.forEach((b: any) => (binary += String.fromCharCode(b)));
+    return window.btoa(binary);
+  };
+
+  const bufferImageToImage = (buffer: any) => {
+    const base64Flag = 'data:image/jpeg;base64,';
+    const imageStr = arrayBufferToBase64(buffer.data);
+    return base64Flag + imageStr;
+  };
+
+  const validPopup = popupData?.filter((popup: any) => {
+    const today = new Date();
+    const startDate = new Date(popup.fecha_inicial);
+    const endDate = new Date(popup.fecha_final);
+    return today >= startDate && today <= endDate;
+  });
+
   return (
     <div className="overflow-x-hidden">
       <Helmet>
@@ -536,7 +556,7 @@ export default function Home() {
         </div>
       </Layout>
       <WhatsAppButton />
-      {popupData?.length > 0 &&
+      {/* {popupData?.length > 0 &&
         popupData?.map((popup: any, index: number) => (
           <Modal
             key={index}
@@ -545,12 +565,36 @@ export default function Home() {
             title=""
           >
             <div className="mb-4">
-              <h3 className="text-lg leading-6 font-medium text-gray-900">
-                {popup.titulo}
-              </h3>
-              <div className="mt-2">
-                <p className="text-sm text-gray-500">{popup.descripcion}</p>
-              </div>
+              <img
+                src={bufferImageToImage(popup.contenido_documento)}
+                alt="popup"
+                className="w-full h-full max-h-[80vh]"
+              />
+            </div>
+          </Modal>
+        ))} */}
+      {validPopup?.length > 0 &&
+        validPopup?.map((popup: any, index: number) => (
+          <Modal
+            key={index}
+            isOpen={openModal}
+            onClose={() => setOpenModal(false)}
+            title=""
+          >
+            <div
+              className="mb-4 cursor-pointer"
+              onClick={() =>
+                window.open(
+                  'https://api.whatsapp.com/send?phone=51920046149&text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20los%20cursos%20de%20capacitaci%C3%B3n%20del%20ICL',
+                  '_blank'
+                )
+              }
+            >
+              <img
+                src={bufferImageToImage(popup.contenido_documento)}
+                alt="popup"
+                className="w-full h-full"
+              />
             </div>
           </Modal>
         ))}
