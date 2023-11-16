@@ -9,6 +9,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { CustomSelect } from '../Select';
 import { forEach } from 'lodash';
 import { useGetAreasQuery } from '../../redux/reduxQuery/utils';
+import { returnLinkPDFFromBuffer } from '../../utils/showImageBuffer';
 
 const Convocatorias = () => {
   const form = useForm();
@@ -35,7 +36,7 @@ const Convocatorias = () => {
     data.periodo_convocatoria = data.periodo_convocatoria?.value || '';
     forEach(data, (value, key) => {
       if (value === '' || value === null || value === undefined) {
-        delete data[key]; 
+        delete data[key];
       }
     });
     data.autorizado = 1;
@@ -135,13 +136,36 @@ const Convocatorias = () => {
             Header: 'Aviso',
             Cell: ({ row }: any) => (
               <div className="flex items-center">
-                {row.original.url_aviso === '' ? (
-                  <span className="text-sm font-medium ">No hay documento</span>
+                {row.original.avisos?.length === 0 ? (
+                  <span className="text-sm font-medium ">-</span>
                 ) : (
                   <Button
-                    onClick={() =>
-                      window.open(row.original.url_aviso, '_blank')
-                    }
+                    onClick={() => {
+                      const contenido_documento =
+                        row.original.avisos[0]?.contenido_documento;
+                      const url_documento =
+                        row.original.avisos[0]?.url_documento;
+
+                      if (
+                        contenido_documento !== null &&
+                        contenido_documento !== undefined
+                      ) {
+                        const link =
+                          returnLinkPDFFromBuffer(contenido_documento);
+
+                        if (link) {
+                          window.open(link, '_blank');
+                        } else {
+                          // Handle the case when returnLinkPDFFromBuffer returns null
+                          console.error('Error generating PDF link.');
+                        }
+                      } else if (
+                        url_documento !== null &&
+                        url_documento !== undefined
+                      ) {
+                        window.open(url_documento, '_blank');
+                      }
+                    }}
                   >
                     Ver
                   </Button>
