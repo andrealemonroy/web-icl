@@ -136,7 +136,9 @@ export const Layout: FC<LayoutProps> = ({
                               className="flex flex-col gap-4 justify-center px-8 py-4 cursor-pointer hover:bg-primary hover:!text-white"
                               onClick={() => {
                                 setOpenSearch(false);
-                                router(result.link);
+                                result.link.includes('http')
+                                  ? window.open(result.link, '_blank')
+                                  : router(result.link);
                               }}
                               onMouseEnter={() => setMouseOver(index)}
                               onMouseLeave={() => setMouseOver('')}
