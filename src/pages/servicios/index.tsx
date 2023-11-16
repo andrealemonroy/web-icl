@@ -52,7 +52,7 @@ export default function Servicios({
   React.useEffect(() => {
     setLoaded(true);
     InitialProcess();
-  }, []);
+  }, [id]);
 
   const InitialProcess = () => {
     form.setValue('metraje', '');
@@ -61,6 +61,7 @@ export default function Servicios({
     setSelectedItems([]);
     setTotal(0);
   };
+
   const handleCalculate = form.handleSubmit((data) => {
     if (data.metraje === '' || data.construido === '') {
       setError('Por favor, complete todos los campos');
