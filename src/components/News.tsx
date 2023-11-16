@@ -17,7 +17,7 @@ export const News: FC<NewsType> = ({
     .join(' ');
   return (
     <div className="sm:flex gap-4 border-2 border-primary rounded-md sm:h-64">
-      <div className="h-full w-fit">
+      <div className="h-full w-fit sm:min-w-[320px]">
         <img
           src={url_imagen_portada}
           alt="news"
