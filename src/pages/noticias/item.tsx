@@ -4,6 +4,7 @@ import { SectionBanner } from '../../components/SectionBanner';
 import { useLocation } from 'react-router-dom';
 import { useGetNewsQuery } from '../../redux/reduxQuery/news';
 import { useState } from 'react';
+import { returnImageFromBuffer } from '../../utils/showImageBuffer';
 
 export default function Noticia() {
   const [openMenu, setOpenMenu] = useState(false);
@@ -39,7 +40,7 @@ export default function Noticia() {
         </div>
         <p className="font-lato text-md my-8">{data?.descripcion_noticia}</p>
         <div className="flex justify-center sm:justify-end gap-4">
-          {data?.images?.map((image: any) => (
+          {data?.imagenes?.map((image: any) => (
             <div className="h-96 relative w-1/3" key={image.id}>
               {/* <Image
                 src={image.url_imagen}
@@ -47,7 +48,16 @@ export default function Noticia() {
                 width={500}
                 height={500}
               /> */}
-              <img src={image.url_imagen} alt="news" width={500} height={500} />
+              <img
+                src={
+                  image.contenido_documento
+                    ? returnImageFromBuffer(image.contenido_documento)
+                    : image.url_documento
+                }
+                alt="news"
+                width={500}
+                height={500}
+              />
             </div>
           ))}
         </div>
