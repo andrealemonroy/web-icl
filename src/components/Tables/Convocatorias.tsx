@@ -30,6 +30,7 @@ const Convocatorias = () => {
     isLoading: isLoadingPeriodosConvocatorias,
     isError: isErrorPeriodosConvocatorias,
   } = useGetConvocatoriasPeriodoQuery('');
+  console.log(normasEmitidas, 'normasEmitidas');
 
   const handleSubmit = form.handleSubmit((data) => {
     data.id_area = data.id_area?.value || '';
@@ -167,7 +168,25 @@ const Convocatorias = () => {
                       }
                     }}
                   >
-                    Ver
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"
+                      />
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                      />
+                    </svg>
                   </Button>
                 )}
               </div>
@@ -183,15 +202,56 @@ const Convocatorias = () => {
             Header: 'Comunicado',
             Cell: ({ row }: any) => (
               <div className="flex items-center">
-                {row.original.url_comunicado === '' ? (
-                  <span className="text-sm font-medium ">No hay documento</span>
+                {row.original.comunicacion1s?.length === 0 ? (
+                  <span className="text-sm font-medium ">-</span>
                 ) : (
                   <Button
-                    onClick={() =>
-                      window.open(row.original.url_comunicacion1, '_blank')
-                    }
+                    onClick={() => {
+                      const contenido_documento =
+                        row.original.comunicacion1s[0]?.contenido_documento;
+                      const url_documento =
+                        row.original.comunicacion1s[0]?.url_documento;
+
+                      if (
+                        contenido_documento !== null &&
+                        contenido_documento !== undefined
+                      ) {
+                        const link =
+                          returnLinkPDFFromBuffer(contenido_documento);
+
+                        if (link) {
+                          window.open(link, '_blank');
+                        } else {
+                          // Handle the case when returnLinkPDFFromBuffer returns null
+                          console.error('Error generating PDF link.');
+                        }
+                      } else if (
+                        url_documento !== null &&
+                        url_documento !== undefined
+                      ) {
+                        window.open(url_documento, '_blank');
+                      }
+                    }}
                   >
-                    Ver comunicado
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"
+                      />
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                      />
+                    </svg>
                   </Button>
                 )}
               </div>
@@ -207,18 +267,56 @@ const Convocatorias = () => {
             Header: 'Evaluación Curricular',
             Cell: ({ row }: any) => (
               <div className="flex items-center">
-                {row.original.url_resultado_evaluacion_curricular === '' ? (
-                  <span className="text-sm font-medium ">No hay documento</span>
+                {row.original.curriculos?.length === 0 ? (
+                  <span className="text-sm font-medium ">-</span>
                 ) : (
                   <Button
-                    onClick={() =>
-                      window.open(
-                        row.original.url_resultado_evaluacion_curricular,
-                        '_blank'
-                      )
-                    }
+                    onClick={() => {
+                      const contenido_documento =
+                        row.original.curriculos[0]?.contenido_documento;
+                      const url_documento =
+                        row.original.curriculos[0]?.url_documento;
+
+                      if (
+                        contenido_documento !== null &&
+                        contenido_documento !== undefined
+                      ) {
+                        const link =
+                          returnLinkPDFFromBuffer(contenido_documento);
+
+                        if (link) {
+                          window.open(link, '_blank');
+                        } else {
+                          // Handle the case when returnLinkPDFFromBuffer returns null
+                          console.error('Error generating PDF link.');
+                        }
+                      } else if (
+                        url_documento !== null &&
+                        url_documento !== undefined
+                      ) {
+                        window.open(url_documento, '_blank');
+                      }
+                    }}
                   >
-                    Ver resultado
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"
+                      />
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                      />
+                    </svg>
                   </Button>
                 )}
               </div>
@@ -234,18 +332,56 @@ const Convocatorias = () => {
             Header: 'Examen',
             Cell: ({ row }: any) => (
               <div className="flex items-center">
-                {row.original.url_resultado_examen_virtual === '' ? (
-                  <span className="text-sm font-medium ">No hay documento</span>
+                {row.original.examens?.length === 0 ? (
+                  <span className="text-sm font-medium ">-</span>
                 ) : (
                   <Button
-                    onClick={() =>
-                      window.open(
-                        row.original.url_resultado_examen_virtual,
-                        '_blank'
-                      )
-                    }
+                    onClick={() => {
+                      const contenido_documento =
+                        row.original.examens[0]?.contenido_documento;
+                      const url_documento =
+                        row.original.examens[0]?.url_documento;
+
+                      if (
+                        contenido_documento !== null &&
+                        contenido_documento !== undefined
+                      ) {
+                        const link =
+                          returnLinkPDFFromBuffer(contenido_documento);
+
+                        if (link) {
+                          window.open(link, '_blank');
+                        } else {
+                          // Handle the case when returnLinkPDFFromBuffer returns null
+                          console.error('Error generating PDF link.');
+                        }
+                      } else if (
+                        url_documento !== null &&
+                        url_documento !== undefined
+                      ) {
+                        window.open(url_documento, '_blank');
+                      }
+                    }}
                   >
-                    Ver resultado
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"
+                      />
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                      />
+                    </svg>
                   </Button>
                 )}
               </div>
@@ -261,18 +397,56 @@ const Convocatorias = () => {
             Header: 'Entrevista',
             Cell: ({ row }: any) => (
               <div className="flex items-center">
-                {row.original.url_resultado_entrevista_virtual === '' ? (
-                  <span className="text-sm font-medium ">No hay documento</span>
+                {row.original.entrevista?.length === 0 ? (
+                  <span className="text-sm font-medium ">-</span>
                 ) : (
                   <Button
-                    onClick={() =>
-                      window.open(
-                        row.original.url_resultado_entrevista_virtual,
-                        '_blank'
-                      )
-                    }
+                    onClick={() => {
+                      const contenido_documento =
+                        row.original.entrevista[0]?.contenido_documento;
+                      const url_documento =
+                        row.original.entrevista[0]?.url_documento;
+
+                      if (
+                        contenido_documento !== null &&
+                        contenido_documento !== undefined
+                      ) {
+                        const link =
+                          returnLinkPDFFromBuffer(contenido_documento);
+
+                        if (link) {
+                          window.open(link, '_blank');
+                        } else {
+                          // Handle the case when returnLinkPDFFromBuffer returns null
+                          console.error('Error generating PDF link.');
+                        }
+                      } else if (
+                        url_documento !== null &&
+                        url_documento !== undefined
+                      ) {
+                        window.open(url_documento, '_blank');
+                      }
+                    }}
                   >
-                    Ver resultado
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"
+                      />
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                      />
+                    </svg>
                   </Button>
                 )}
               </div>
@@ -288,15 +462,56 @@ const Convocatorias = () => {
             Header: 'Resultado final',
             Cell: ({ row }: any) => (
               <div className="flex items-center">
-                {row.original.url_puntaje_final === '' ? (
-                  <span className="text-sm font-medium ">No hay documento</span>
+                {row.original.finals?.length === 0 ? (
+                  <span className="text-sm font-medium ">-</span>
                 ) : (
                   <Button
-                    onClick={() =>
-                      window.open(row.original.url_puntaje_final, '_blank')
-                    }
+                    onClick={() => {
+                      const contenido_documento =
+                        row.original.finals[0]?.contenido_documento;
+                      const url_documento =
+                        row.original.finals[0]?.url_documento;
+
+                      if (
+                        contenido_documento !== null &&
+                        contenido_documento !== undefined
+                      ) {
+                        const link =
+                          returnLinkPDFFromBuffer(contenido_documento);
+
+                        if (link) {
+                          window.open(link, '_blank');
+                        } else {
+                          // Handle the case when returnLinkPDFFromBuffer returns null
+                          console.error('Error generating PDF link.');
+                        }
+                      } else if (
+                        url_documento !== null &&
+                        url_documento !== undefined
+                      ) {
+                        window.open(url_documento, '_blank');
+                      }
+                    }}
                   >
-                    Ver
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"
+                      />
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                      />
+                    </svg>
                   </Button>
                 )}
               </div>
