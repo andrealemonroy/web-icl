@@ -4,12 +4,12 @@ const utilsApi = api.injectEndpoints({
   endpoints: (build) => ({
     getTiposDocumento: build.query({
       query: () => ({
-        url: `${API_URL}/documentostipo`,
+        url: `${API_URL}/documentostipo?activo=1`,
       }),
     }),
     getAreas: build.query({
       query: () => ({
-        url: `${API_URL}/areas`,
+        url: `${API_URL}/areas?activo=1`,
       }),
     }),
   }),
