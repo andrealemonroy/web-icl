@@ -10,7 +10,7 @@ const serviciosApi = api.injectEndpoints({
     }),
     getServicio: build.query({
       query: (id) => ({
-        url: `${API_URL}/servicios?tipo_servicio=${id}`,
+        url: `${API_URL}/servicios?tipo_servicio=${id}&flag_seleccion=1`,
       }),
     }),
   }),
