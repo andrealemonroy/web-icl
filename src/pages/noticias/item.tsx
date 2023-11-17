@@ -3,7 +3,7 @@ import { Layout } from '../../components/Layout';
 import { SectionBanner } from '../../components/SectionBanner';
 import { useLocation } from 'react-router-dom';
 import { useGetNewsQuery } from '../../redux/reduxQuery/news';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { returnImageFromBuffer } from '../../utils/showImageBuffer';
 
 export default function Noticia() {
@@ -12,6 +12,9 @@ export default function Noticia() {
   const id = location.pathname.split('/')[2];
   const { data: allNews } = useGetNewsQuery('');
   const data = allNews?.find((item: any) => item.id === parseInt(id));
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
   return (
     <Layout openMenu={openMenu} setOpenMenu={setOpenMenu}>
       <SectionBanner
@@ -39,9 +42,9 @@ export default function Noticia() {
           />
         </div>
         <p className="font-lato text-md my-8">{data?.descripcion_noticia}</p>
-        <div className="flex justify-center sm:justify-end gap-4">
+        <div className="flex sm:flex-row flex-col justify-center sm:justify-end gap-4">
           {data?.imagenes?.map((image: any) => (
-            <div className="h-96 relative w-1/3" key={image.id}>
+            <div className="h-fit relative sm:w-1/3" key={image.id}>
               {/* <Image
                 src={image.url_imagen}
                 alt="news"
