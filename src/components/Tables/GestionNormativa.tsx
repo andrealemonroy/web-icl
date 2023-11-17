@@ -12,6 +12,7 @@ import {
 } from '../../redux/reduxQuery/utils';
 import { CustomSelect } from '../Select';
 import { forEach } from 'lodash';
+import { returnLinkPDFFromBuffer } from '../../utils/showImageBuffer';
 
 const GestionNormativa = () => {
   const form = useForm();
@@ -157,20 +158,26 @@ const GestionNormativa = () => {
           {
             Header: 'Ver documento',
             Cell: ({ row }: any) => (
-              <div className="flex items-center">
-                {row.original.url_documento_resolucion === '' ? (
-                  <span className="text-sm font-medium ">No hay documento</span>
+              <div className="flex items-center w-full">
+                {row.original.url_documento ||
+                row.original.contenido_documento ? (
+                  <div className="flex items-center">
+                    <Button
+                      onClick={() =>
+                        window.open(
+                          row.original.url_documento ||
+                            returnLinkPDFFromBuffer(
+                              row.original.contenido_documento
+                            ),
+                          '_blank'
+                        )
+                      }
+                    >
+                      Ver documento
+                    </Button>
+                  </div>
                 ) : (
-                  <Button
-                    onClick={() =>
-                      window.open(
-                        row.original.url_documento_resolucion,
-                        '_blank'
-                      )
-                    }
-                  >
-                    Ver documento
-                  </Button>
+                  <span className="text-sm font-medium ">No hay documento</span>
                 )}
               </div>
             ),
