@@ -9,6 +9,7 @@ import {
 import { Controller, useForm } from 'react-hook-form';
 import { CustomSelect } from '../Select';
 import { forEach } from 'lodash';
+import { returnLinkPDFFromBuffer } from '../../utils/showImageBuffer';
 
 const RendicionDeCuentas = () => {
   const form = useForm();
@@ -97,17 +98,26 @@ const RendicionDeCuentas = () => {
                 ? window.innerWidth * 0.2
                 : window.innerWidth * 0.6,
             Cell: ({ row }: any) => (
-              <div className="flex items-center">
-                {row.original.url_rendicion === '' ? (
-                  <span className="text-sm font-medium ">No hay documento</span>
+              <div className="flex items-center w-full">
+                {row.original.url_documento ||
+                row.original.contenido_documento ? (
+                  <div className="flex items-center">
+                    <Button
+                      onClick={() =>
+                        window.open(
+                          row.original.url_documento ||
+                            returnLinkPDFFromBuffer(
+                              row.original.contenido_documento
+                            ),
+                          '_blank'
+                        )
+                      }
+                    >
+                      Ver documento
+                    </Button>
+                  </div>
                 ) : (
-                  <Button
-                    onClick={() =>
-                      window.open(row.original.url_rendicion, '_blank')
-                    }
-                  >
-                    Ver documento
-                  </Button>
+                  <span className="text-sm font-medium ">No hay documento</span>
                 )}
               </div>
             ),
