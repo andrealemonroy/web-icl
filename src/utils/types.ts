@@ -19,8 +19,8 @@ export interface VideoType {
   id: number;
   id_categoria_video: number;
   titulo_video: string;
-  url_video: string;
-  url_imagen_video: string;
+  link_video: string;
+  url_documento: string;
 }
 export interface NormasType {
   id: number;

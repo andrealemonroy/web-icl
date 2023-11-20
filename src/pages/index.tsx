@@ -33,6 +33,7 @@ export default function Home() {
   const videosData4 = videosData?.slice(0, 4);
 
   const getDriveFileId = (url: string) => {
+    console.log(url);
     const match = url?.match(/file\/d\/([^/]+)/);
     return match ? match[0] : '';
   };
@@ -505,33 +506,34 @@ export default function Home() {
                       key={index}
                       className="flex flex-col gap-4  sm:w-[20vw] sm:h-[280px] w-[90vw] h-[200px]"
                     >
-                      <div className="flex items-center justify-center h-full relative">
-                        {index !== isClicked && (
-                          <div
-                            className="h-full w-full cursor-pointer bg-cover bg-center flex items-center justify-center rounded-md relative"
-                            style={{
-                              backgroundImage: `url(${video.url_imagen_video})`,
-                            }}
-                            onClick={() => handleImageClick(index)}
-                          >
+                      {/* <div className="flex items-center justify-center h-full relative">
+                        <img
+                          src={video.url_documento}
+                          alt="video"
+                          className="w-full h-full object-cover rounded-md"
+                        />
+                        <div
+                          className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 rounded-md cursor-pointer"
+                          onClick={() => handleImageClick(index)}
+                        >
+                          <div className="flex items-center justify-center h-full">
                             <img
                               src="/images/pagina-1/play.svg"
-                              alt="Play"
-                              width={100}
-                              height={100}
-                              className="z-10 absolute cursor-pointer top-[50px] left-[100px]"
+                              alt="play"
+                              className="w-16 h-16"
                             />
                           </div>
-                        )}
+                        </div>
+                      </div> */}
+                      <div className="flex items-center justify-center h-full relative">
                         <iframe
+                          width="100%"
+                          height="100%"
                           src={`https://drive.google.com/${getDriveFileId(
-                            video.url_video
+                            video.link_video
                           )}/preview`}
-                          allow="autoplay"
-                          allowFullScreen
-                          className={`w-full h-full ${
-                            isClicked ? '' : 'hidden'
-                          }`}
+                          title="YouTube video player"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         ></iframe>
                       </div>
 
