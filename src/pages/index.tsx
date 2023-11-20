@@ -526,15 +526,28 @@ export default function Home() {
                         </div>
                       </div> */}
                       <div className="flex items-center justify-center h-full relative">
-                        <iframe
-                          width="100%"
-                          height="100%"
-                          src={`https://drive.google.com/${getDriveFileId(
-                            video.link_video
-                          )}/preview`}
-                          title="YouTube video player"
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        ></iframe>
+                        {video.link_video?.includes('youtube') && (
+                          <iframe
+                            width="100%"
+                            height="100%"
+                            src={`https://www.youtube.com/embed/${
+                              video.link_video?.split('=')[1]
+                            }`}
+                            title="Reproductor de video"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                          ></iframe>
+                        )}
+                        {video.link_video?.includes('drive') && (
+                          <iframe
+                            width="100%"
+                            height="100%"
+                            src={`https://drive.google.com/${getDriveFileId(
+                              video.link_video
+                            )}/preview`}
+                            title="Reproductor de video"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                          ></iframe>
+                        )}
                       </div>
 
                       <h3 className="font-acto text-primary text-xl h-[120px]">
