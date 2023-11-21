@@ -354,7 +354,7 @@ export default function Home() {
             </div>
           </div>
           <RevealOnScroll>
-            <div className="text-center py-12 sm:w-10/12 w-11/12 mx-auto">
+            <div className="text-center sm:py-12 pt-8 sm:w-10/12 w-11/12 mx-auto">
               <h2 className="font-acto text-primary sm:text-[3vw] text-3xl">
                 Noticias y eventos
               </h2>
@@ -377,7 +377,7 @@ export default function Home() {
             </div>
           </RevealOnScroll>
           <RevealOnScroll>
-            <div className="py-12 sm:w-10/12 mx-auto flex flex-col justify-center items-center gap-20 text-left w-11/12">
+            <div className="sm:py-12 pt-8 sm:w-10/12 mx-auto flex flex-col justify-center items-center sm:gap-20 gap-8 text-left w-11/12">
               <div className="text-center">
                 <h2 className="font-acto text-primary sm:text-[3vw] text-3xl">
                   Recursos
@@ -400,7 +400,7 @@ export default function Home() {
                       className="h-full"
                     />
                   </div>
-                  <h3 className="font-acto text-primary sm:text-[1.5vw] text-xl 2xl:text-[1.3vw] leading-tight h-20">
+                  <h3 className="font-acto text-primary sm:text-[1.5vw] text-xl 2xl:text-[1.3vw] leading-tight sm:h-20">
                     Manual de Levantamiento Catastral
                   </h3>
                   <Button
@@ -421,7 +421,7 @@ export default function Home() {
                       className="h-full"
                     />
                   </div>
-                  <h3 className="font-acto text-primary sm:text-[1.5vw] text-xl 2xl:text-[1.3vw] leading-tight h-20">
+                  <h3 className="font-acto text-primary sm:text-[1.5vw] text-xl 2xl:text-[1.3vw] leading-tight sm:h-20">
                     Plan para vigilancia, prevención y control de Covid-19
                   </h3>
                   <Button
@@ -445,7 +445,7 @@ export default function Home() {
                       className="h-full"
                     />
                   </div>
-                  <h3 className="font-acto text-primary sm:text-[1.5vw] text-xl 2xl:text-[1.3vw] leading-tight h-20">
+                  <h3 className="font-acto text-primary sm:text-[1.5vw] text-xl 2xl:text-[1.3vw] leading-tight sm:h-20">
                     Atención de denuncias ciudadanas por el Sistema Nacional de
                     Control
                   </h3>
@@ -470,7 +470,7 @@ export default function Home() {
                       className="h-full"
                     />
                   </div>
-                  <h3 className="font-acto text-primary sm:text-[1.5vw] text-xl 2xl:text-[1.3vw] leading-tight h-20">
+                  <h3 className="font-acto text-primary sm:text-[1.5vw] text-xl 2xl:text-[1.3vw] leading-tight sm:h-20">
                     Libro de Reclamaciones Digital
                   </h3>
                   <div className="w-full">
@@ -489,7 +489,7 @@ export default function Home() {
             </div>
           </RevealOnScroll>
           <RevealOnScroll>
-            <div className="text-center py-12 sm:w-10/12 mx-auto">
+            <div className="text-center sm:py-12 py-8 sm:w-10/12 mx-auto">
               <h2 className="font-acto text-primary sm:text-[3vw] text-3xl">
                 Videoteca
               </h2>

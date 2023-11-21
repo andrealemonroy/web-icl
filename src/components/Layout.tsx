@@ -62,7 +62,7 @@ export const Layout: FC<LayoutProps> = ({
         setOpenMenu={setOpenMenu || setOpenMenuLayout}
       />
       {openSearch && (
-        <div className="fixed z-50 inset-0 overflow-y-auto">
+        <div className="fixed z-50 inset-0 overflow-y-auto px-4 sm:px-0 pt-8 sm:pt-0">
           <div className="flex items-end justify-center min-h-[70vh] pt-4 pb-20 text-center">
             <div className="fixed inset-0 transition-opacity">
               <div className="absolute inset-0 bg-black opacity-75"></div>
@@ -72,7 +72,7 @@ export const Layout: FC<LayoutProps> = ({
               <div className="bg-white">
                 <div className="sm:flex sm:items-start">
                   <div className="text-center sm:mt-0 sm:text-left w-full">
-                    <div className="bg-white z-50 flex items-center justify-between shadow-md w-full h-[96px] min-h-[96px]">
+                    <div className="bg-white z-50 flex items-center justify-between shadow-md sm:w-full h-[96px] min-h-[96px]">
                       <input
                         className="w-full bg-transparent outline-none text-primary text-lg sm:text-[1.5vw] font-acto px-8"
                         type="text"
@@ -89,7 +89,7 @@ export const Layout: FC<LayoutProps> = ({
                           width={32}
                           height={32}
                         />
-                        <div className="">
+                        <div className="sm:mr-0 mr-4">
                           <button
                             onClick={() => {
                               setOpenSearch(false);

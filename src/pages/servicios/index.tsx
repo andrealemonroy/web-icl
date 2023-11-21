@@ -116,7 +116,7 @@ export default function Servicios({
           <h3 className="font-acto text-4xl text-primary">
             Calculadora del servicio {idUpperCased}
           </h3>
-          <div className="flex mt-8 gap-8">
+          <div className="flex sm:flex-rol flex-col mt-8 gap-8">
             <Input
               labelText="¿Cuál es el metraje?"
               placeholderText="Ej: 100"
@@ -151,20 +151,22 @@ export default function Servicios({
                 />
               </div>
             </div>
-            <div className="flex items-center w-40 mt-4">
-              <Button onClick={handleCalculate}>
-                <p className="font-lato-bold text-md text-white">Calcular</p>
-              </Button>
+            <div className="flex gap-4">
+              <div className="flex items-center w-40 sm:mt-4">
+                <Button onClick={handleCalculate}>
+                  <p className="font-lato-bold text-md text-white">Calcular</p>
+                </Button>
+              </div>
+              <div className="flex items-center w-40 sm:mt-4">
+                <p
+                  className="font-lato-bold text-md text-primary cursor-pointer"
+                  onClick={InitialProcess}
+                >
+                  Nueva búsqueda
+                </p>
+              </div>
             </div>
-            <div className="flex items-center w-40 mt-4">
-              <p
-                className="font-lato-bold text-md text-primary cursor-pointer"
-                onClick={InitialProcess}
-              >
-                Nueva búsqueda
-              </p>
-            </div>
-            <div className="flex items-center justify-center w-40 mt-4 gap-4 bg-blue rounded-md ml-auto">
+            <div className="flex items-center justify-center sm:w-40 w-full sm:mt-4 gap-4 bg-blue rounded-md ml-auto">
               <p className="font-lato-bold text-md text-white">Total:</p>
               <p className="font-lato-bold text-lg text-white ">
                 S/{total.toFixed(2)}

@@ -52,7 +52,7 @@ export const SectionBanner: FC<Props> = ({
           )}
         </div>
         {image && (
-          <div className="absolute -right-[5vw] bottom-8 h-[320px] max-w-[440px] w-full overflow-hidden">
+          <div className="absolute -right-[5vw] bottom-8 h-[320px] max-w-[440px] w-full overflow-hidden sm:block hidden">
             <img src={image} alt={title} className="w-full h-80" />
           </div>
         )}

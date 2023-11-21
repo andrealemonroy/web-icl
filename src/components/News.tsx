@@ -24,13 +24,19 @@ export const News: FC<NewsType> = ({
           className="rounded-t-sm sm:rounded-tr-none h-full w-full"
         />
       </div>
+
       <div className="flex flex-col justify-between sm:text-left text-center py-2 mr-2">
-        <h3 className="font-acto text-primary text-xl">{titulo_noticia}</h3>
+        <div>
+          <p className="text-primary text-xs mt-2 font-bold">
+            {fecha_noticia?.slice(0, 10).split('-').reverse().join('/')}
+          </p>
+          <h3 className="font-acto text-primary text-xl">{titulo_noticia}</h3>
+        </div>
         <div>
           <span className="font-lato text-md">{truncatedDescription}</span>
           <span className="text-gray ml-1">... </span>
         </div>
-        <p className="text-primary text-xs mt-2">{fecha_noticia}</p>
+
         <div className="flex justify-center sm:justify-end">
           <div className="mt-2 w-48 mx-auto sm:mx-0">
             <Button

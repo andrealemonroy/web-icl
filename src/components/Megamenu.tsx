@@ -28,6 +28,10 @@ const MegaMenu: FC<MegaMenuProps> = ({ openMenu, setOpenMenu }) => {
     }
   }, [url]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [openMenu]);
+
   return (
     <div
       className={`megamenu-slide absolute sm:top-24 top-12 w-screen z-0 h-unset bg-lightBlue flex-col ${
@@ -38,13 +42,13 @@ const MegaMenu: FC<MegaMenuProps> = ({ openMenu, setOpenMenu }) => {
       <div className="flex sm:px-16 sm:h-[calc(100vh-176px)]">
         <div
           id="first-column"
-          className="flex flex-col sm:w-1/3 transition-all transform overflow-y-scroll"
+          className="flex flex-col sm:gap-0 gap-4 sm:w-1/3 transition-all transform overflow-y-scroll sm:my-0 my-4"
         >
           {categoriesMegamenu.map((category) => {
             return (
               <div
                 key={category.id}
-                className={`my-6 ml-4 megamenu-item ${
+                className={`sm:my-6 mt-4 ml-4 megamenu-item ${
                   selectedCategory?.id === category.id &&
                   firstChildren?.length > 0
                     ? 'opacity-100'
