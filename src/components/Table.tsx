@@ -31,6 +31,10 @@ interface ITable {
   loading?: boolean;
 }
 
+const removeAccents = (str: string) => {
+  return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+};
+
 export const Table = ({
   columns = [],
   data = [],
@@ -75,6 +79,26 @@ export const Table = ({
 
   const pages = Array.from(Array(pageCount).keys());
 
+  const filteredData = React.useMemo(() => {
+    if (!globalFilter) {
+      return data;
+    }
+    return data?.filter((row: any) => {
+      return columns?.some((column: any) => {
+        if (!column.id) {
+          return false;
+        }
+        const cellValue = row.values[column.id];
+        const normalizedCellValue = removeAccents(
+          String(cellValue).toLowerCase()
+        );
+        const normalizedSearchText = removeAccents(globalFilter).toLowerCase();
+
+        return normalizedCellValue.includes(normalizedSearchText);
+      });
+    });
+  }, [data, columns, globalFilter]);
+
   return (
     <>
       <TableWrapper>
@@ -97,14 +121,22 @@ export const Table = ({
               {' '}
               {/* Scroll Container */}
               <table className="w-max table-fixed border-collapse">
-                <thead style={{ borderBottom: `2px solid #F0F0F0`, backgroundColor: '#fff', position: 'sticky', top: '0' }}>
+                <thead
+                  style={{
+                    borderBottom: `2px solid #F0F0F0`,
+                    backgroundColor: '#fff',
+                    position: 'sticky',
+                    top: '0',
+                  }}
+                >
                   {headerGroups.map((headerGroup: any, index: any) => (
                     <tr
                       {...headerGroup.getHeaderGroupProps()}
                       style={{
                         width: 'max-content',
                         display: 'flex',
-                        justifyContent: 'space-between',                        paddingLeft: '1rem',
+                        justifyContent: 'space-between',
+                        paddingLeft: '1rem',
                         paddingRight: '1rem',
                       }}
                       key={index}
@@ -201,7 +233,7 @@ export const Table = ({
                         justifyContent: 'space-between',
                         borderBottom: `2px solid #F0F0F0`,
                         paddingLeft: '1rem',
-                        paddingRight: '1rem'
+                        paddingRight: '1rem',
                       }}
                     >
                       <td
@@ -223,7 +255,7 @@ export const Table = ({
         )}
       </TableWrapper>
       {pages.length > 0 ? (
-        <div className='flex sm:flex-row flex-col justify-between sm:items-center items-end mt-4 gap-4'>
+        <div className="flex sm:flex-row flex-col justify-between sm:items-center items-end mt-4 gap-4">
           <div>
             <select
               value={pageSize}

@@ -133,7 +133,7 @@ export const Layout: FC<LayoutProps> = ({
                           (result: any, index: any | null | undefined) => (
                             <div
                               key={index}
-                              className="flex flex-col gap-4 justify-center px-8 py-4 cursor-pointer hover:bg-primary hover:!text-white"
+                              className="flex flex-col justify-center px-8 py-2 cursor-pointer hover:bg-primary hover:!text-white"
                               onClick={() => {
                                 setOpenSearch(false);
                                 result.link.includes('http')

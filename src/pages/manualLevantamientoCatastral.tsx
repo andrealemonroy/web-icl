@@ -31,14 +31,14 @@ const ManualDeLevatamientoCatastral = () => {
           </p>
           <p className="font-lato-bold underline text-primary text-lg">
             <Link
-              to="http://icl.gob.pe/wp-content/uploads/2022/01/Manual-de-levantamiento-catastral.pdf"
+              to="https://icl.gob.pe/wp-content/uploads/2022/01/manual_levantamiento_catastral_alfanumerico.pdf"
               target="_blank"
             >
               Acuerdo de Consejo Directivo N° 004-2018-CD-ICL/MML
             </Link>
           </p>
           <p className="font-lato-bold underline text-primary text-lg">
-            <Link to="http://icl.gob.pe/wp-content/uploads/2022/01/manual_levantamiento_catastral_alfanumerico.pdf">
+            <Link to="http://icl.gob.pe/wp-content/uploads/2022/01/manual_levantamiento_catastral_alfanumerico.pdf" target="_blank">
               Manual de Levantamiento Catastral Urbano Municipal
             </Link>
           </p>

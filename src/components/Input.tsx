@@ -113,7 +113,7 @@ export const Input = React.forwardRef<any, InputProps>(
               borderRadius: 4,
             }}
             ref={ref}
-            type={type === 'password' && hidePassword ? 'password' : 'text'}
+            type={type === 'password' && hidePassword ? 'password' : type}
             placeholder={placeholderText}
             error={error}
             icon={icon}

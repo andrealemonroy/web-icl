@@ -1,15 +1,15 @@
-import { Layout } from '../../components/Layout';
 import React, { useEffect } from 'react';
-import { useGetServicioQuery } from '../../redux/reduxQuery/servicios';
-import { List } from '../../components/List';
+import { useForm } from 'react-hook-form';
+import axios from 'axios';
+
+import { Layout } from '../../components/Layout';
 import { SectionBanner } from '../../components/SectionBanner';
-import FAQComponent from '../../components/Faq';
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
-import { useForm } from 'react-hook-form';
+
+import { useGetServicioQuery } from '../../redux/reduxQuery/servicios';
+import { List } from '../../components/List';
 import RadioButton from '../../components/Radio';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 export default function Servicios({
   id,
@@ -17,19 +17,21 @@ export default function Servicios({
   id: string | string[] | undefined;
 }) {
   const [openMenu, setOpenMenu] = React.useState(false);
-  const router = useNavigate();
+  const [secondStep, setSecondStep] = React.useState(false);
+  const [thirdStep, setThirdStep] = React.useState(false);
   const form = useForm();
   const idUpperCased = id?.toString().toUpperCase();
   const [loaded, setLoaded] = React.useState(false);
   const [selectedItems, setSelectedItems] = React.useState<any>([]);
   const [error, setError] = React.useState('');
   const [total, setTotal] = React.useState(0);
+  const [resultado, setResultado] = React.useState(false);
+
   const {
     data: dataServicio,
     error: errorServicio,
     refetch: refetchServicio,
   } = useGetServicioQuery(idUpperCased);
-
   const dataServicioFiltered = dataServicio?.filter(
     (item: any) =>
       item.flag_seleccion === '1' &&
@@ -37,17 +39,6 @@ export default function Servicios({
       item.activo === '1'
   );
   const [dataFiltered, setDataFiltered] = React.useState(dataServicioFiltered);
-  const faqs = [
-    {
-      question: '¿Cómo puedo solicitar un procedimiento administrativo?',
-      answer:
-        'Puedes solicitar un procedimiento administrativo a través de nuestra plataforma web.',
-    },
-    {
-      question: '¿Dónde puedo encontrar más información sobre las tasas?',
-      answer: 'Puedes encontrar más información sobre las tasas en el TUPA.',
-    },
-  ];
 
   React.useEffect(() => {
     setLoaded(true);
@@ -60,16 +51,12 @@ export default function Servicios({
     setDataFiltered(dataServicioFiltered);
     setSelectedItems([]);
     setTotal(0);
+    setResultado(false);
+    setSecondStep(false);
+    setThirdStep(false);
   };
 
   const handleCalculate = form.handleSubmit((data) => {
-    if (data.metraje === '' || data.construido === '') {
-      setError('Por favor, complete todos los campos');
-      return;
-    } else if (selectedItems.length === 0) {
-      setError('Por favor, seleccione al menos un servicio');
-      return;
-    }
     try {
       setTotal(0);
       Promise.all(
@@ -86,9 +73,9 @@ export default function Servicios({
               },
             })
             .then((res) => {
-              console.log(res.data);
               const total = res.data.valor_servicio;
               setTotal((prev) => prev + parseFloat(total));
+              setResultado(true);
             })
             .catch((err: any) => console.log(err));
         })
@@ -112,163 +99,247 @@ export default function Servicios({
           {...(idUpperCased === 'TUPA' ? firstObj : secondObj)}
           image={`/images/servicios/${idUpperCased}.svg`}
         />
-        <div className="px-8 sm:px-20 py-12">
-          <h3 className="font-acto text-4xl text-primary">
-            Calculadora del servicio {idUpperCased}
-          </h3>
-          <div className="flex sm:flex-rol flex-col mt-8 gap-8">
-            <Input
-              labelText="¿Cuál es el metraje?"
-              placeholderText="Ej: 100"
-              type="text"
-              {...form.register('metraje')}
-              onChange={(e) => {
-                const value = e.target.value;
-                const regex = /^[0-9\b]+$/;
-                if (value === '' || regex.test(value)) {
-                  form.setValue('metraje', value);
-                }
-              }}
-            />
-            <div>
-              <p className="font-lato-bold text-md text-primary">
-                ¿Está construído?
-              </p>
-              <div className="flex gap-4 p-2">
-                <RadioButton
-                  id="si"
-                  value="si"
-                  label="Sí"
-                  name="construido"
-                  onChange={(e) => form.setValue('construido', e.target.value)}
-                />
-                <RadioButton
-                  id="no"
-                  value="no"
-                  label="No"
-                  name="construido"
-                  onChange={(e) => form.setValue('construido', e.target.value)}
-                />
-              </div>
-            </div>
-            <div className="flex gap-4">
-              <div className="flex items-center w-40 sm:mt-4">
-                <Button onClick={handleCalculate}>
-                  <p className="font-lato-bold text-md text-white">Calcular</p>
-                </Button>
-              </div>
-              <div className="flex items-center w-40 sm:mt-4">
-                <p
-                  className="font-lato-bold text-md text-primary cursor-pointer"
-                  onClick={InitialProcess}
-                >
-                  Nueva búsqueda
-                </p>
-              </div>
-            </div>
-            <div className="flex items-center justify-center sm:w-40 w-full sm:mt-4 gap-4 bg-blue rounded-md ml-auto">
-              <p className="font-lato-bold text-md text-white">Total:</p>
-              <p className="font-lato-bold text-lg text-white ">
-                S/{total.toFixed(2)}
-              </p>
-            </div>
-          </div>
-          <div className="flex items-center">
-            {error && (
-              <p className="font-lato-bold text-md text-red-500">{error}</p>
-            )}
-          </div>
-          <div>
-            {selectedItems.length > 0 && (
+        {!resultado && (
+          <div className="px-8 sm:px-20 py-12">
+            <div className="flex items-center">
               <div>
-                <p className="font-lato-bold text-md text-primary">
-                  Servicios seleccionados
+                <h3 className="font-acto text-4xl text-primary">
+                  Calculadora del servicio {idUpperCased}
+                </h3>
+                <p className="mt-4 ml-0.5">
+                  Calcula el costo de los servicios que deseas solicitar
                 </p>
-                <div className="grid sm:grid-cols-4 gap-6">
-                  {selectedItems.map((item: any) => (
-                    <div key={item.id}>
-                      <div className="grid col-span-full sm:col-span-6 xl:col-span-3 bg-white  shadow-lg rounded-md border border-primary overflow-hidden min-h-[260px]">
-                        <div className="flex flex-col justify-between">
-                          {/* Card Content */}
-                          <div className="grow flex flex-col p-5 pb-0">
-                            {/* Card body */}
-                            <div className="grow">
-                              {/* Header */}
-                              <header className="mb-3">
-                                <h3 className="text-lg text-primary  font-semibold">
-                                  {item.denominacion_servicio}
-                                </h3>
-                              </header>
-                              <div className="flex flex-wrap justify-between items-center mb-4">
-                                <div className="flex items-center space-x-2 mr-2">
-                                  {item.requisitos_servicio != '' && (
-                                    <p className="text-md text-primary  font-semibold">
-                                      Requisitos:
-                                    </p>
-                                  )}
-                                </div>
-                                <div>
-                                  <p className="text-xs text-primary">Costo:</p>
-                                  <div className="inline-flex text-md font-medium bg-emerald-100  text-emerald-600  rounded-full text-center px-2 py-0.5">
-                                    {/* S/{info.monto_soles} */}
-                                    {item.monto_soles == '0' &&
-                                    item.sub_nivel_servicio == '0'
-                                      ? 'Por calcular'
-                                      : 'S/' + item.monto_soles}
+              </div>
+            </div>
+            <div className="flex sm:flex-row flex-col gap-8 items-center mt-4">
+              <div className="flex sm:flex-row flex-col gap-4 items-center w-full">
+                <span className="font-lato-bold text-4xl leading-tight text-primary border-2 rounded-full w-16 h-16 text-center flex justify-center items-center">
+                  1
+                </span>
+                <Input
+                  labelText="¿Cuál es el metraje del predio?"
+                  placeholderText="Ej: 100"
+                  type="number"
+                  {...form.register('metraje')}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    const regex = /^[0-9\b]+$/;
+                    if (value === '' || regex.test(value)) {
+                      form.setValue('metraje', value);
+                    }
+                  }}
+                />
+                {!secondStep && !thirdStep && (
+                  <div className="flex gap-4 justify-end">
+                    <div className="flex items-center w-40 sm:mt-4">
+                      <Button onClick={() => setSecondStep(true)}>
+                        <p className="font-lato-bold text-md text-white">
+                          Siguiente
+                        </p>
+                      </Button>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {secondStep && (
+                <div className="flex sm:flex-row flex-col gap-4 items-center w-full">
+                  <span className="font-lato-bold text-4xl leading-tight text-primary border-2 rounded-full w-16 h-16 text-center flex justify-center items-center">
+                    2
+                  </span>
+                  <div className="flex flex-col">
+                    <p className="font-lato-bold text-md text-primary">
+                      ¿Está construído?
+                    </p>
+                    <div className="flex sm:flex-row flex-col gap-4 items-center">
+                      <div className="flex gap-4 items-center mt-4">
+                        <RadioButton
+                          id="si"
+                          value="si"
+                          label="Sí"
+                          name="construido"
+                          onChange={(e) =>
+                            form.setValue('construido', e.target.value)
+                          }
+                        />
+                        <RadioButton
+                          id="no"
+                          value="no"
+                          label="No"
+                          name="construido"
+                          onChange={(e) =>
+                            form.setValue('construido', e.target.value)
+                          }
+                        />
+                      </div>
+                      {secondStep && !thirdStep && (
+                        <div className="w-40 ml-4">
+                          <Button onClick={() => setThirdStep(true)}>
+                            <p className="font-lato-bold text-md text-white">
+                              Siguiente
+                            </p>
+                          </Button>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              )}
+              {thirdStep && (
+                <div className="ml-auto w-40">
+                  <Button
+                    onClick={handleCalculate}
+                    color={`${
+                      selectedItems.length > 0
+                        ? 'bg-primary text-white border border-primary'
+                        : 'bg-slate-400 text-white cursor-not-allowed'
+                    }`}
+                  >
+                    <p className="font-lato-bold text-md text-white">
+                      Calcular total
+                    </p>
+                  </Button>
+                </div>
+              )}
+            </div>
+
+            {thirdStep && (
+              <div>
+                {selectedItems.length > 0 && (
+                  <div>
+                    {selectedItems.length > 0 && (
+                      <div>
+                        <p className="font-lato-bold text-md text-primary">
+                          Servicios seleccionados
+                        </p>
+                        <div className="grid sm:grid-cols-4 gap-6">
+                          {selectedItems.map((item: any) => (
+                            <div key={item.id} className="w-full">
+                              <div className="grid col-span-full sm:col-span-6 xl:col-span-3 bg-white  shadow-lg rounded-md border border-primary overflow-hidden min-h-[260px]">
+                                <div className="flex flex-col justify-between">
+                                  {/* Card Content */}
+                                  <div className="grow flex flex-col p-5 pb-0">
+                                    {/* Card body */}
+                                    <div className="grow">
+                                      {/* Header */}
+                                      <header className="mb-3">
+                                        <h3 className="text-lg text-primary  font-semibold">
+                                          {item.denominacion_servicio}
+                                        </h3>
+                                      </header>
+                                      <div className="flex flex-wrap justify-between items-center mb-4">
+                                        <div className="flex items-center space-x-2 mr-2">
+                                          {item.requisitos_servicio != '' && (
+                                            <p className="text-md text-primary  font-semibold">
+                                              Requisitos:
+                                            </p>
+                                          )}
+                                        </div>
+                                        <div>
+                                          <p className="text-xs text-primary">
+                                            Costo:
+                                          </p>
+                                          <div className="inline-flex text-md font-medium bg-emerald-100  text-emerald-600  rounded-full text-center px-2 py-0.5">
+                                            {/* S/{info.monto_soles} */}
+                                            {item.monto_soles == '0' &&
+                                            item.sub_nivel_servicio == '0'
+                                              ? 'Por calcular'
+                                              : 'S/' + item.monto_soles}
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div className="mb-3">
+                                        <p className="text-sm text-slate-400 dark:text-slate-500">
+                                          {item.requisitos_servicio}
+                                        </p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  {/* Card footer */}
+                                  <div className="p-5 pt-0">
+                                    <Button
+                                      onClick={() => {
+                                        setSelectedItems((prev: any) =>
+                                          prev.filter(
+                                            (itemSelected: any) =>
+                                              itemSelected.id !== item.id
+                                          )
+                                        );
+                                      }}
+                                    >
+                                      Remover servicio
+                                    </Button>
                                   </div>
                                 </div>
                               </div>
-                              <div className="mb-3">
-                                <p className="text-sm text-slate-400 dark:text-slate-500">
-                                  {item.requisitos_servicio}
-                                </p>
-                              </div>
                             </div>
-                          </div>
-                          {/* Card footer */}
-                          <div className="p-5 pt-0">
-                            <Button
-                              onClick={() => {
-                                setSelectedItems((prev: any) => {
-                                  const index = prev.findIndex(
-                                    (item: any) => item.id === item.id
-                                  );
-                                  if (index !== -1) {
-                                    return prev.filter(
-                                      (item: any) => item.id !== item.id
-                                    );
-                                  } else {
-                                    return [...prev, item];
-                                  }
-                                });
-                                setTotal((prev) => prev - item.monto_soles);
-                              }}
-                            >
-                              Remover servicio
-                            </Button>
-                          </div>
+                          ))}
                         </div>
                       </div>
-                    </div>
-                  ))}
-                </div>
+                    )}
+                  </div>
+                )}
+                <p className="font-lato-bold text-md text-primary mt-4">
+                  Selecciona los servicios que deseas solicitar
+                </p>
+                {/* List component */}
+                <List
+                  items={dataFiltered}
+                  setItems={setDataFiltered}
+                  selectedItems={selectedItems}
+                  setSelectedItems={setSelectedItems}
+                  total={total}
+                />
               </div>
             )}
-            <p className="font-lato-bold text-md text-primary mt-4">
-              Selecciona los servicios que deseas solicitar
-            </p>
-            <List
-              items={dataFiltered}
-              setItems={setDataFiltered}
-              selectedItems={selectedItems}
-              setSelectedItems={setSelectedItems}
-              total={total}
-            />
           </div>
-        </div>
-        <div className="px-8 sm:px-20 py-12">
-          <FAQComponent items={faqs} />
-        </div>
+        )}
+
+        {resultado && (
+          <div className="px-8 sm:px-20 py-12">
+            <div className="flex items-center">
+              <div>
+                <h3 className="font-acto text-4xl text-primary">
+                  Resultado del cálculo
+                </h3>
+                <p className="mt-4 ml-0.5">
+                  El metraje del predio es de:
+                  <span className="font-lato-bold text-2xl text-primary">
+                    {form.getValues('metraje')} m2
+                  </span>
+                </p>
+                <p className="mt-4 ml-0.5">
+                  El predio se encuentra:{' '}
+                  <span className="font-lato-bold text-2xl text-primary">
+                    {form.getValues('construido') === 'si'
+                      ? 'Construído'
+                      : 'Sin construir'}
+                  </span>
+                </p>
+                <p className="mt-4 ml-0.5">
+                  Los servicios solicitados son los siguientes:
+                </p>
+                <p className="mt-4 ml-0.5">
+                  El costo total de los servicios es de:{' '}
+                  <span className="font-lato-bold text-2xl text-primary">
+                    S/ {total.toFixed(2)}
+                  </span>
+                </p>
+                <div className="mt-4">
+                  <Button
+                    onClick={() => {
+                      InitialProcess();
+                    }}
+                  >
+                    <p className="font-lato-bold text-md text-white">
+                      Calcular otro servicio
+                    </p>
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </Layout>
     </>
   );

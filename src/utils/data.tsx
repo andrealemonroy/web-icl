@@ -872,7 +872,7 @@ export const categoriesMegamenu = [
         slug: 'consulta-catastral',
         children: [],
         description:
-          'Accede rápidamente a información catastral detallada y actualizada, facilitando la gestión y planificación urbana desde la comodidad de tu hogar u oficina.',
+          'Provee información detallada sobre el uso del suelo, zonificación, y otros aspectos territoriales en Lima.',
         link: 'https://sit.icl.gob.pe/appconsulta/',
       },
       {
@@ -881,7 +881,7 @@ export const categoriesMegamenu = [
         slug: 'portafolio-de-aplicaciones-gis',
         children: [],
         description:
-          'Accede rápidamente a información catastral detallada y actualizada, facilitando la gestión y planificación urbana desde la comodidad de tu hogar u oficina.',
+          'Herramientas y aplicaciones que facilitan el análisis espacial y la visualización de datos georreferenciados.',
         link: 'https://sit.icl.gob.pe/portafolio/',
       },
       {
@@ -957,7 +957,7 @@ export const categoriesMegamenu = [
         name: 'Ley Nº 27972 – Ley Orgánica de Municipalidades',
         slug: 'ley-organica-de-municipalidades',
         description:
-          'Explore los instrumentos de gestión y planes que guían nuestras operaciones, junto con las políticas que aseguran la transparencia y la eficiencia en el Instituto Catastral de Lima.',
+          'Conozca las disposiciones legales fundamentales que rigen la organización y funciones de las municipalidades, conforme a la Ley N° 27972.',
         children: [],
         link: '/marco-legal/ley-organica-de-municipalidades',
       },
@@ -966,7 +966,7 @@ export const categoriesMegamenu = [
         name: 'Ley Tributación Municipal',
         slug: 'ley-tributacion-municipal',
         description:
-          'Explore los instrumentos de gestión y planes que guían nuestras operaciones, junto con las políticas que aseguran la transparencia y la eficiencia en el Instituto Catastral de Lima.',
+          'Explora la legislación relacionada con la tributación municipal, que establece las bases para la recaudación de impuestos locales.',
         children: [],
         link: '/marco-legal/ley-tributacion-municipal',
       },
@@ -975,7 +975,7 @@ export const categoriesMegamenu = [
         name: 'Ley Nº 27867 – Ley Orgánica de Gobiernos Regionales',
         slug: 'ley-organica-de-gobiernos-regionales',
         description:
-          'Explore los instrumentos de gestión y planes que guían nuestras operaciones, junto con las políticas que aseguran la transparencia y la eficiencia en el Instituto Catastral de Lima.',
+          'Obtenga información sobre la estructura y funciones de los gobiernos regionales según lo establecido en la Ley N° 27867.',
         children: [],
         link: '/marco-legal/ley-organica-de-gobiernos-regionales',
       },
@@ -984,7 +984,7 @@ export const categoriesMegamenu = [
         name: 'Reglamento de Acondicionamiento Territorial',
         slug: 'reglamento-de-acondicionamiento-territorial',
         description:
-          'Explore los instrumentos de gestión y planes que guían nuestras operaciones, junto con las políticas que aseguran la transparencia y la eficiencia en el Instituto Catastral de Lima.',
+          'Acceda al reglamento que establece las normas y procedimientos para el acondicionamiento territorial en nuestra región.',
         children: [],
         link: '/marco-legal/reglamento-de-acondicionamiento-territorial',
       },
