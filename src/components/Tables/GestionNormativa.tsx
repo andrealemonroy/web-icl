@@ -133,16 +133,7 @@ const GestionNormativa = () => {
         columns={[
           {
             Header: 'N° de documento',
-            Cell: ({ row }: any) => (
-              <div className="flex items-center">
-                <span className="text-sm font-medium">
-                  {row.original.numero_resolucion}-
-                  {row.original.periodo_resolucion}-
-                  {row.original.abreviacion_area}
-                  -ICL/MML
-                </span>
-              </div>
-            ),
+            accessor: 'codigo_directiva',
             width:
               window.innerWidth > 768 && window.innerWidth < 1800
                 ? window.innerWidth * 0.14

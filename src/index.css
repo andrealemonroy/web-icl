@@ -206,7 +206,6 @@ body {
   width: 100%;
 }
 
-
 .radio-button {
   width: 20px;
   height: 20px;
@@ -216,7 +215,7 @@ body {
   cursor: pointer;
 }
 
-.radio-button input[type="radio"] {
+.radio-button input[type='radio'] {
   opacity: 0;
   width: 100%;
   height: 100%;
@@ -237,9 +236,9 @@ body {
   opacity: 0;
 }
 
-.radio-button input[type="radio"]:checked + .radio-inner {
-  opacity: 1
-} 
+.radio-button input[type='radio']:checked + .radio-inner {
+  opacity: 1;
+}
 
 .category-name {
   position: relative;
@@ -248,7 +247,7 @@ body {
 }
 
 .category-name::after {
-  content: "";
+  content: '';
   position: absolute;
   bottom: 0;
   left: 0;
@@ -282,13 +281,17 @@ body {
 }
 
 /* For modern browsers */
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
 /* For Firefox */
-input[type="number"] {
+input[type='number'] {
   -moz-appearance: textfield;
+}
+
+.form-checkbox {
+  @apply bg-white dark:bg-slate-100 border focus:ring-0 focus:ring-offset-0 dark:disabled:bg-slate-700/30 dark:disabled:border-slate-700 dark:disabled:hover:border-slate-700 cursor-pointer w-6 h-6 checked:bg-primary hover:checked:bg-primary checked:border-transparent rounded;
 }

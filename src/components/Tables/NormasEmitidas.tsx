@@ -148,16 +148,7 @@ const NormasEmitidas = () => {
         columns={[
           {
             Header: 'N° de documento',
-            Cell: ({ row }: any) => (
-              <div className="flex items-center font-lato">
-                <span className="text-sm font-medium">
-                  {row.original.numero_resolucion}-
-                  {row.original.periodo_resolucion}-
-                  {row.original.abreviacion_area}
-                  -ICL/MML
-                </span>
-              </div>
-            ),
+            accessor: 'codigo_resolucion',
             width: window.innerWidth * 0.15,
           },
           {

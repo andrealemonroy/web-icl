@@ -39,7 +39,7 @@ export const Table = ({
   columns = [],
   data = [],
   rowClick = null,
-  loading = false,
+  loading = false
 }: ITable) => {
   columns = columns || [];
   data = data || [];
@@ -52,7 +52,7 @@ export const Table = ({
       columns,
       data,
       rowClick,
-      initialState: { pageSize: 5 },
+      initialState: { pageSize: 10 },
       loading,
     } as any,
     useGlobalFilter,
@@ -262,6 +262,7 @@ export const Table = ({
               onChange={(e) => {
                 setPageSize(Number(e.target.value));
               }}
+              className="rounded-md px-2 py-2 w-24 cursor-pointer"
             >
               {[5, 10, 20, 30, 40, 50].map((pageSize) => (
                 <option key={pageSize} value={pageSize}>
