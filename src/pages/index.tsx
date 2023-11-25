@@ -33,16 +33,9 @@ export default function Home() {
   const videosData4 = videosData?.slice(0, 4);
 
   const getDriveFileId = (url: string) => {
-    console.log(url);
     const match = url?.match(/file\/d\/([^/]+)/);
     return match ? match[0] : '';
-  };
-
-  const [isClicked, setIsClicked] = useState(null);
-
-  const handleImageClick = (index: any) => {
-    setIsClicked(index);
-  };
+  }
 
   const arrayBufferToBase64 = (buffer: any) => {
     let binary = '';
@@ -85,7 +78,6 @@ export default function Home() {
           content="URL de una imagen representativa de tu página"
         />
         <meta name="twitter:card" content="summary_large_image" />
-        {/* Puedes añadir más meta tags según sea necesario */}
       </Helmet>
       <Layout setOpenMenu={setOpenMenu} openMenu={openMenu}>
         <Banner
@@ -236,23 +228,8 @@ export default function Home() {
                           Consulta Catastral
                         </div>
                       </div>
-                      {/* <div className="text-slate-400 mb-4">
-                        Permite a los usuarios obtener detalles específicos
-                        sobre propiedades en Lima, como ubicación y dimensiones.
-                      </div>
-                      <Button
-                        onClick={() =>
-                          window.open(
-                            'https://sit.icl.gob.pe/conoce_lima/',
-                            '_blank'
-                          )
-                        }
-                      >
-                        Realizar Consulta
-                      </Button> */}
                     </Link>
                   </div>
-                  {/* Host */}
                   <div className="flex items-start">
                     <Link to="https://sit.icl.gob.pe/sit/" target="_blank">
                       <div className="flex gap-4 items-center ">
@@ -267,20 +244,6 @@ export default function Home() {
                           Sistema de información territorial
                         </div>
                       </div>
-                      {/* <div className="text-slate-400 mb-4">
-                        Permite a los usuarios obtener detalles específicos
-                        sobre propiedades en Lima, como ubicación y dimensiones.
-                      </div>
-                      <Button
-                        onClick={() =>
-                          window.open(
-                            'https://sit.icl.gob.pe/conoce_lima/',
-                            '_blank'
-                          )
-                        }
-                      >
-                        Realizar Consulta
-                      </Button> */}
                     </Link>
                   </div>
                   <div className="flex items-start">
@@ -333,20 +296,6 @@ export default function Home() {
                           Mesa de Partes
                         </div>
                       </div>
-                      {/* <div className="text-slate-400 mb-4">
-                        Permite a los usuarios obtener detalles específicos
-                        sobre propiedades en Lima, como ubicación y dimensiones.
-                      </div>
-                      <Button
-                        onClick={() =>
-                          window.open(
-                            'https://sit.icl.gob.pe/conoce_lima/',
-                            '_blank'
-                          )
-                        }
-                      >
-                        Realizar Consulta
-                      </Button> */}
                     </Link>
                   </div>
                 </div>
@@ -571,23 +520,6 @@ export default function Home() {
         </div>
       </Layout>
       <WhatsAppButton />
-      {/* {popupData?.length > 0 &&
-        popupData?.map((popup: any, index: number) => (
-          <Modal
-            key={index}
-            isOpen={openModal}
-            onClose={() => setOpenModal(false)}
-            title=""
-          >
-            <div className="mb-4">
-              <img
-                src={bufferImageToImage(popup.contenido_documento)}
-                alt="popup"
-                className="w-full h-full max-h-[80vh]"
-              />
-            </div>
-          </Modal>
-        ))} */}
       {validPopup?.length > 0 &&
         validPopup?.map((popup: any, index: number) => (
           <Modal

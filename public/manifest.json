@@ -1,0 +1,9 @@
+{
+  "name": "Página web del Instituto Catastral de Lima",
+  "version": "1.0.0",
+  "description": "Dando forma a la Lima del mañana. Tu aliado en la gestión catastral y territorial, facilitando un desarrollo urbano sostenible y planificado. Web del Instituto Catastral de Lima.",
+  "manifest_version": 1,
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#ffffff"
+}

@@ -62,17 +62,17 @@ export const Layout: FC<LayoutProps> = ({
         setOpenMenu={setOpenMenu || setOpenMenuLayout}
       />
       {openSearch && (
-        <div className="fixed z-50 inset-0 overflow-y-auto px-4 sm:px-0 pt-8 sm:pt-0">
-          <div className="flex items-end justify-center min-h-[70vh] pt-4 pb-20 text-center">
+        <div className="fixed z-50 inset-0 overflow-y-auto px-4 sm:px-0 sm:pt-16">
+          <div className="flex items-end justify-center min-h-[70vh] text-center">
             <div className="fixed inset-0 transition-opacity">
               <div className="absolute inset-0 bg-black opacity-75"></div>
             </div>
 
-            <div className="inline-block bg-white rounded-md text-left overflow-hidden shadow-xl transform transition-all align-middle max-w-lg w-full">
+            <div className="inline-block bg-white rounded-md text-left overflow-hidden shadow-xl transform transition-all align-middle max-w-2xl w-full">
               <div className="bg-white">
                 <div className="sm:flex sm:items-start">
                   <div className="text-center sm:mt-0 sm:text-left w-full">
-                    <div className="bg-white z-50 flex items-center justify-between shadow-md sm:w-full h-[96px] min-h-[96px]">
+                    <div className="bg-white z-50 flex items-center justify-between shadow-md sm:w-full h-[72px] min-h-[72px]">
                       <input
                         className="w-full bg-transparent outline-none text-primary text-lg sm:text-[1.5vw] font-acto px-8"
                         type="text"
@@ -99,41 +99,30 @@ export const Layout: FC<LayoutProps> = ({
                             className="pt-2 border border-transparent"
                           >
                             <svg
-                              className="transition-transform duration-300 ease-in-out transform rotate-0"
-                              width="27"
-                              height="26"
-                              viewBox="0 0 27 26"
-                              fill="none"
                               xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke-width="1.5"
+                              stroke="currentColor"
+                              className="w-10 h-10"
                             >
-                              <line
-                                x1="1.70711"
-                                y1="1.29289"
-                                x2="25.7071"
-                                y2="25.2929"
-                                stroke="#16236E"
-                                strokeWidth="2"
-                              />
-                              <line
-                                x1="1.29289"
-                                y1="25.2929"
-                                x2="25.2929"
-                                y2="1.29289"
-                                stroke="#16236E"
-                                strokeWidth="2"
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M6 18L18 6M6 6l12 12"
                               />
                             </svg>
                           </button>
                         </div>
                       </div>
                     </div>
-                    <div className="overflow-y-auto max-h-[70vh] sm:max-h-[20vh] w-full bg-white border-t-2 border-t-primary">
+                    <div className="overflow-y-auto max-h-[30vh] sm:max-h-[320px] sm:min-h-[320px] w-full bg-white border-t-2 border-t-primary">
                       {results.length > 0 &&
                         results.map(
                           (result: any, index: any | null | undefined) => (
                             <div
                               key={index}
-                              className="flex flex-col justify-center px-8 py-2 cursor-pointer hover:bg-primary hover:!text-white"
+                              className="flex flex-col justify-center px-8 py-2 cursor-pointer hover:bg-primary hover:!text-white border-b border-primary"
                               onClick={() => {
                                 setOpenSearch(false);
                                 result.link.includes('http')

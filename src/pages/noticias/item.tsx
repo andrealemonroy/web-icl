@@ -1,4 +1,3 @@
-import axios from 'axios'; // Assuming you're using axios with react-query
 import { Layout } from '../../components/Layout';
 import { SectionBanner } from '../../components/SectionBanner';
 import { useLocation } from 'react-router-dom';
@@ -28,12 +27,6 @@ export default function Noticia() {
           {data?.titulo_noticia}
         </h3>
         <div className="flex justify-between items-center">
-          {/* <Image
-            src={data?.url_imagen_portada}
-            alt="news"
-            width={500}
-            height={500}
-          /> */}
           <img
             src={data?.url_imagen_portada}
             alt="news"
@@ -45,12 +38,6 @@ export default function Noticia() {
         <div className="flex sm:flex-row flex-col justify-center sm:justify-end gap-4">
           {data?.imagenes?.map((image: any) => (
             <div className="h-fit relative sm:w-1/3" key={image.id}>
-              {/* <Image
-                src={image.url_imagen}
-                alt="news"
-                width={500}
-                height={500}
-              /> */}
               <img
                 src={
                   image.contenido_documento
@@ -68,33 +55,3 @@ export default function Noticia() {
     </Layout>
   );
 }
-
-// This is the function that fetches the news data. It's what you'd typically use with react-query's useQuery hook.
-// async function fetchNews() {
-//   const response = await axios.get(
-//     `${process.env.NEXT_PUBLIC_API_URL}/noticias`
-//   );
-//   return response.data;
-// }
-
-// async function fetchNewsImages({ id }: { id: number }) {
-//   const response = await axios.get(
-//     `${process.env.NEXT_PUBLIC_API_URL}/noticias/${id}/imagenes`
-//   );
-//   return response.data;
-// }
-
-// async function getNewsById(id: number) {
-//   try {
-//     const newsData = await fetchNews();
-//     const newsImages = await fetchNewsImages({ id });
-//     const news = newsData.find((item: any) => item.id === id);
-//     return {
-//       ...news,
-//       images: newsImages,
-//     };
-//   } catch (error) {
-//     console.error('Error fetching news by ID:', error);
-//     return null;
-//   }
-// }

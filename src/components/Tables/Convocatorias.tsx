@@ -30,7 +30,6 @@ const Convocatorias = () => {
     isLoading: isLoadingPeriodosConvocatorias,
     isError: isErrorPeriodosConvocatorias,
   } = useGetConvocatoriasPeriodoQuery('');
-  console.log(normasEmitidas, 'normasEmitidas');
 
   const handleSubmit = form.handleSubmit((data) => {
     data.id_area = data.id_area?.value || '';
