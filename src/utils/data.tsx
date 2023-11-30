@@ -1103,3 +1103,23 @@ export const categoriesMegamenu = [
     link: '/icl-capacitaciones',
   },
 ];
+
+export const globalFilter = (rows: any, columnIds: any, filterValue: any) => {
+  if (!filterValue) {
+    return rows;
+  }
+
+  const lowerCaseFilterValue = removeAccents(filterValue.toLowerCase());
+
+  return rows.filter((row: any) => {
+    return columnIds.some((columnId: any) => {
+      const cellValue = row.values[columnId];
+      return removeAccents(String(cellValue).toLowerCase()).includes(
+        lowerCaseFilterValue
+      );
+    });
+  });
+};
+const removeAccents = (str: any) => {
+  return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+};

@@ -16,6 +16,7 @@ import {
   DownArrow,
   UpArrow,
 } from './SharedTableStyles';
+import { globalFilter } from '../utils/data';
 
 const CUSTOM_RENDER_COLUMNS = ['Status', 'Actions', 'Requests', 'FV Status'];
 
@@ -31,15 +32,11 @@ interface ITable {
   loading?: boolean;
 }
 
-const removeAccents = (str: string) => {
-  return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-};
-
 export const Table = ({
   columns = [],
   data = [],
   rowClick = null,
-  loading = false
+  loading = false,
 }: ITable) => {
   columns = columns || [];
   data = data || [];
@@ -51,12 +48,11 @@ export const Table = ({
     {
       columns,
       data,
-      rowClick,
       initialState: { pageSize: 10 },
+      globalFilter,
       loading,
     } as any,
     useGlobalFilter,
-    useFilters,
     useSortBy,
     usePagination
   );
@@ -67,7 +63,6 @@ export const Table = ({
     page,
     prepareRow,
     state,
-    state: { globalFilter },
     setGlobalFilter,
     pageCount,
     pageSize,
@@ -78,26 +73,6 @@ export const Table = ({
   }: any = tableInstance;
 
   const pages = Array.from(Array(pageCount).keys());
-
-  const filteredData = React.useMemo(() => {
-    if (!globalFilter) {
-      return data;
-    }
-    return data?.filter((row: any) => {
-      return columns?.some((column: any) => {
-        if (!column.id) {
-          return false;
-        }
-        const cellValue = row.values[column.id];
-        const normalizedCellValue = removeAccents(
-          String(cellValue).toLowerCase()
-        );
-        const normalizedSearchText = removeAccents(globalFilter).toLowerCase();
-
-        return normalizedCellValue.includes(normalizedSearchText);
-      });
-    });
-  }, [data, columns, globalFilter]);
 
   return (
     <>
@@ -113,7 +88,7 @@ export const Table = ({
                 type="text"
                 placeholder="Buscar"
                 className="border border-gray-300 rounded-md px-2 py-2 w-full"
-                value={globalFilter || ''}
+                value={state.globalFilter || ''}
                 onChange={(e) => setGlobalFilter(e.target.value)}
               />
             </div>

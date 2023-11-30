@@ -74,7 +74,7 @@ export const Layout: FC<LayoutProps> = ({
                   <div className="text-center sm:mt-0 sm:text-left w-full">
                     <div className="bg-white z-50 flex items-center justify-between shadow-md sm:w-full h-[72px] min-h-[72px]">
                       <input
-                        className="w-full bg-transparent outline-none text-primary text-lg sm:text-[1.5vw] font-acto px-8"
+                        className="w-full bg-transparent outline-none text-primary text-lg sm:text-[1.5vw] font-acto px-8 border-none"
                         type="text"
                         placeholder="Buscar"
                         onChange={(e) => setTextSearch(e.target.value)}
@@ -107,8 +107,8 @@ export const Layout: FC<LayoutProps> = ({
                               className="w-10 h-10"
                             >
                               <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
                                 d="M6 18L18 6M6 6l12 12"
                               />
                             </svg>
