@@ -24,9 +24,7 @@ export default function Servicios({
     refetch: refetchServicio,
   } = useGetServicioQuery(idUpperCased);
   const dataServicioFiltered = dataServicio?.filter(
-    (item: any) =>
-      item.autorizado === '1' &&
-      item.activo === '1'
+    (item: any) => item.autorizado === '1' && item.activo === '1'
   );
 
   React.useEffect(() => {
@@ -41,8 +39,17 @@ export default function Servicios({
   const calculateTotalCostSelected = () => {
     let total = 0;
     selectedItems.forEach((item: any) => {
-      total += parseFloat(item.monto_soles);
+      // Ensure item.monto_soles is a string representing a number
+      const amount = parseFloat(item.monto_soles.replace(/,/g, '')); // remove commas if any
+      if (!isNaN(amount)) {
+        total += amount;
+      } else {
+        console.error('Invalid number:', item.monto_soles);
+      }
     });
+
+    // To handle floating point precision, round to a fixed number of decimal places
+    total = parseFloat(total.toFixed(2)); // Adjust the number of decimal places as needed
     setResultado(total);
   };
 
@@ -131,7 +138,9 @@ export default function Servicios({
                         ? window.innerWidth / 5
                         : window.innerWidth < 780
                         ? 100
-                        : window.innerWidth > 2200 ? window.innerWidth / 3.5 : window.innerWidth / 8,
+                        : window.innerWidth > 2200
+                        ? window.innerWidth / 3.5
+                        : window.innerWidth / 8,
                     Cell: ({ row }: any) => {
                       if (
                         (row.original.sub_nivel_servicio != 0 &&
