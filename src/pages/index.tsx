@@ -50,12 +50,40 @@ export default function Home() {
     return base64Flag + imageStr;
   };
 
+  function convertToDate(dateString:any) {
+    const parts = dateString.split("/");
+  
+    if(parts.length !== 3) {
+      throw new Error("Invalid date format");
+    }
+  
+    const day = parseInt(parts[0], 10);
+    const month = parseInt(parts[1], 10) - 1; // JavaScript counts months from 0
+    const year = parseInt(parts[2], 10);
+  
+    // Validate the date parts
+    if(day < 1 || day > 31 || month < 0 || month > 11 || year < 1000 || year > 3000) {
+      throw new Error("Invalid date components");
+    }
+  
+    const date = new Date(year, month, day);
+  
+    // Additional check to avoid issues with invalid dates like 31st February
+    if(date.getFullYear() !== year || date.getMonth() !== month || date.getDate() !== day) {
+      throw new Error("Invalid date");
+    }
+  
+    return date;
+  }
+
   const validPopup = popupData?.filter((popup: any) => {
     const today = new Date();
-    const startDate = new Date(popup.fecha_inicial);
-    const endDate = new Date(popup.fecha_final);
+    const startDate = convertToDate(popup?.fecha_inicial);
+    const endDate = convertToDate(popup?.fecha_final);
     return today >= startDate && today <= endDate;
   });
+
+  console.log(validPopup, 'validPopup')
 
   return (
     <div className="overflow-x-hidden">
@@ -540,7 +568,7 @@ export default function Home() {
               <img
                 src={bufferImageToImage(popup.contenido_documento)}
                 alt="popup"
-                className="w-full h-full"
+                className="w-full h-full object-cover rounded-md"
               />
             </div>
           </Modal>
