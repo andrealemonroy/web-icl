@@ -83,8 +83,6 @@ export default function Home() {
     return today >= startDate && today <= endDate;
   });
 
-  console.log(validPopup, 'validPopup')
-
   return (
     <div className="overflow-x-hidden">
       <Helmet>
