@@ -24,7 +24,7 @@ export default function Funcionarios() {
     <Layout openMenu={openMenu} setOpenMenu={setOpenMenu}>
       <div>
         <SectionBanner
-          title="Funcionarios"
+          title="Consejo Directivo y Funcionarios"
           caption="Sobre nosotros"
           description="Presentamos a nuestros funcionarios comprometidos con la excelencia y el servicio público en el Instituto Catastral de Lima."
         />

@@ -46,10 +46,15 @@ const Bienvenida = () => {
                 </h3>
               </div>
               <p className="font-lato mt-2 text-left text-lg mb-2 ml-4">
-                Molina Arles, Luis Alfonso
+                Luis Alfonso Molina Arles
               </p>
               <div className="w-full mx-auto sm:mt-0 mt-4">
                 <Accordion items={faqItems} />
+                <a href="/sobre-nosotros/funcionarios">
+                  <button className="bg-primary text-white font-lato-bold rounded-md py-4 w-full">
+                    Funcionarios
+                  </button>
+                </a>
               </div>
             </div>
           </div>

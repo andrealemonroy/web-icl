@@ -166,12 +166,7 @@ export default function Servicios({
                     width: window.innerWidth < 780 ? 100 : 200,
                     Cell: ({ row }: any) => {
                       if (
-                        (row.original.sub_nivel_servicio != 0 &&
-                          row.original.monto_soles == 0) ||
-                        (row.original.sub_nivel_servicio == 0 &&
-                          row.original.monto_soles != 0) ||
-                        (row.original.sub_nivel_servicio != 0 &&
-                          row.original.monto_soles != 0)
+                        (row.original.flag_seleccion == 1)
                       ) {
                         return (
                           <label className="flex items-center">

@@ -11,7 +11,7 @@ interface AccordionProps {
 }
 
 const Accordion: React.FC<AccordionProps> = ({ items }) => {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [openIndex, setOpenIndex] = useState<number | null>();
 
   return (
     <div className="faq-component w-full">
