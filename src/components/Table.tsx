@@ -38,16 +38,16 @@ export const Table = ({
   rowClick = null,
   loading = false,
 }: ITable) => {
-  columns = columns || [];
-  data = data || [];
+  const memoizedColumns = React.useMemo(() => columns, [columns]);
+  const memoizedData = React.useMemo(() => data, [data]);
   rowClick = rowClick || null;
   loading = loading || false;
 
   // useTable hook
   const tableInstance = useTable(
     {
-      columns,
-      data,
+      columns: memoizedColumns,
+      data: memoizedData,
       initialState: { pageSize: 10 },
       globalFilter,
       loading,

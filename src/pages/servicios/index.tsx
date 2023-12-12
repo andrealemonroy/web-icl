@@ -23,10 +23,13 @@ export default function Servicios({
     error: errorServicio,
     refetch: refetchServicio,
   } = useGetServicioQuery(idUpperCased);
-  const dataServicioFiltered = dataServicio?.filter(
-    (item: any) => item.autorizado === '1' && item.activo === '1'
-  );
-
+  
+  const dataServicioFiltered = React.useMemo(() => {
+    return dataServicio?.filter(
+      (item: any) => item.autorizado === '1' && item.activo === '1'
+    );
+  }, [dataServicio]);
+  
   React.useEffect(() => {
     InitialProcess();
   }, [id]);
@@ -179,18 +182,13 @@ export default function Servicios({
                                 ).length > 0
                               }
                               onChange={(e) => {
-                                if (e.target.checked) {
-                                  setSelectedItems([
-                                    ...selectedItems,
-                                    row.original,
-                                  ]);
-                                } else {
-                                  setSelectedItems(
-                                    selectedItems.filter(
-                                      (item: any) => item.id != row.original.id
-                                    )
-                                  );
-                                }
+                                setSelectedItems((currentItems: any[]) => {
+                                  if (e.target.checked) {
+                                    return [...currentItems, row.original];
+                                  } else {
+                                    return currentItems.filter((item: any) => item.id !== row.original.id);
+                                  }
+                                });
                               }}
                             />
                           </label>
