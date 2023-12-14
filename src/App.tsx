@@ -1,7 +1,7 @@
 import './App.css';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { Route, HashRouter as Router, Routes } from 'react-router-dom';
 import Home from './pages';
 import Servicios from './pages/servicios';
 import Bienvenida from './pages/bienvenida';

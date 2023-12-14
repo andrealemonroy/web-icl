@@ -7,7 +7,7 @@ import Loader from '../../components/Loader';
 
 export interface Funcionario {
   image: string;
-  name: string;
+  name_funcionario: string;
   position: string;
   link: string;
 }

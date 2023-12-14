@@ -18,7 +18,7 @@ const CardFuncionario: FC<CardFuncionarioProps> = ({
       <div className="sm:w-4/12">
         <img
           src={funcionario.image}
-          alt={funcionario.name}
+          alt={funcionario.name_funcionario}
           className={`w-full h-auto ${
             index % 2 === 0 ? 'md:ml-auto' : 'md:mr-auto'
           }`}
@@ -28,7 +28,7 @@ const CardFuncionario: FC<CardFuncionarioProps> = ({
         <h3 className="text-2xl font-acto text-primary">
           {funcionario.position}
         </h3>
-        <p className="font-lato text-2xl">{funcionario.name}</p>
+        <p className="font-lato text-2xl">{funcionario.name_funcionario}</p>
         <div className="sm:w-40 mt-2">
           <Button onClick={() => window.open(funcionario.link, '_blank')}>
             Ver perfil
