@@ -4,6 +4,7 @@ import { SectionBanner } from '../components/SectionBanner';
 import { RevealOnScroll } from '../components/Fade';
 import Accordion from '../components/Accordion';
 import { faqItems } from '../utils/data';
+import { Link } from 'react-router-dom';
 
 const Bienvenida = () => {
   const [openMenu, setOpenMenu] = React.useState(false);
@@ -50,11 +51,11 @@ const Bienvenida = () => {
               </p>
               <div className="w-full mx-auto sm:mt-0 mt-4">
                 <Accordion items={faqItems} />
-                <a href="/sobre-nosotros/funcionarios">
+                <Link to="/sobre-nosotros/funcionarios">
                   <button className="bg-primary text-white font-lato-bold rounded-md py-4 w-full">
                     Funcionarios
                   </button>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
