@@ -21,7 +21,10 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
           <div className="bg-white px-4 py-4 sm:p-6 sm:pb-4">
             <div className="sm:flex sm:items-start w-fit">
               <div className="mt-2 text-center sm:mt-0 sm:text-left w-full">
-                <div className="flex justify-end cursor-pointer" onClick={onClose}>
+                <div className="flex justify-end cursor-pointer" onClick={() => {
+                  console.log('Closing modal');
+                  onClose();
+                }}>
                   <svg
                     width="27"
                     height="26"

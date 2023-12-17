@@ -1,4 +1,4 @@
-import { Key, useState } from 'react';
+import { Key, useEffect, useState } from 'react';
 import { Banner } from '../components/Banner';
 import { News } from '../components/News';
 import { Button } from '../components/Button';
@@ -50,29 +50,29 @@ export default function Home() {
     return base64Flag + imageStr;
   };
 
-  function convertToDate(dateString:any) {
+  function convertToDate(dateString: any) {
     const parts = dateString.split("/");
-  
-    if(parts.length !== 3) {
+
+    if (parts.length !== 3) {
       throw new Error("Invalid date format");
     }
-  
+
     const day = parseInt(parts[0], 10);
     const month = parseInt(parts[1], 10) - 1; // JavaScript counts months from 0
     const year = parseInt(parts[2], 10);
-  
+
     // Validate the date parts
-    if(day < 1 || day > 31 || month < 0 || month > 11 || year < 1000 || year > 3000) {
+    if (day < 1 || day > 31 || month < 0 || month > 11 || year < 1000 || year > 3000) {
       throw new Error("Invalid date components");
     }
-  
+
     const date = new Date(year, month, day);
-  
+
     // Additional check to avoid issues with invalid dates like 31st February
-    if(date.getFullYear() !== year || date.getMonth() !== month || date.getDate() !== day) {
+    if (date.getFullYear() !== year || date.getMonth() !== month || date.getDate() !== day) {
       throw new Error("Invalid date");
     }
-  
+
     return date;
   }
 
@@ -82,6 +82,16 @@ export default function Home() {
     const endDate = convertToDate(popup?.fecha_final);
     return today >= startDate && today <= endDate;
   });
+  const [isPopupShown, setPopupShown] = useState(false);
+
+  useEffect(() => {
+    const popupShown = localStorage.getItem('popupShown');
+    if (!popupShown && validPopup?.length > 0) {
+      setPopupShown(true);
+      localStorage.setItem('popupShown', 'true');
+    }
+  }, [validPopup]);
+
 
   return (
     <div className="overflow-x-hidden">
@@ -505,9 +515,8 @@ export default function Home() {
                           <iframe
                             width="100%"
                             height="100%"
-                            src={`https://www.youtube.com/embed/${
-                              video.link_video?.split('=')[1]
-                            }`}
+                            src={`https://www.youtube.com/embed/${video.link_video?.split('=')[1]
+                              }`}
                             title="Reproductor de video"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
                           ></iframe>
@@ -548,12 +557,8 @@ export default function Home() {
       <WhatsAppButton />
       {validPopup?.length > 0 &&
         validPopup?.map((popup: any, index: number) => (
-          <Modal
-            key={index}
-            isOpen={openModal}
-            onClose={() => setOpenModal(false)}
-            title=""
-          >
+          <Modal isOpen={isPopupShown} onClose={() => setPopupShown(false)} title="">
+
             <div
               className="mb-4 cursor-pointer"
               onClick={() =>
