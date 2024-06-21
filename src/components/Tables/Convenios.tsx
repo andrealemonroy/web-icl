@@ -208,7 +208,7 @@ const Convenios = () => {
               form.setValue('distrito', '');
               form.setValue('año', '');
               form.setValue('mes', '');
-              setParams('');
+              setParams('autorizado=1&activo=1');
               refetchConvenios();
             }}
           >

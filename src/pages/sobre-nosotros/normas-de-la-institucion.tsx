@@ -11,7 +11,7 @@ const NormasDeLaInstitucion = () => {
     data: normasData,
     error: normasError,
     isLoading: normasIsLoading,
-  } = useGetNormasQuery('');
+  } = useGetNormasQuery('autorizado=1&activo=1');
   const [openMenu, setOpenMenu] = React.useState(false);
   return (
     <Layout openMenu={openMenu} setOpenMenu={setOpenMenu}>

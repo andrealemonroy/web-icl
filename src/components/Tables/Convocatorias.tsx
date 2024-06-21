@@ -95,6 +95,7 @@ const Convocatorias = () => {
               form.setValue('id_area', '');
               form.setValue('periodo_convocatoria', '');
               setParams('');
+              setParams('autorizado=1&activo=1');
               refetchConvocatorias();
             }}
           >

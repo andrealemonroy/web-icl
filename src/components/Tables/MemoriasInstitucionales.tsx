@@ -67,7 +67,7 @@ const MemoriasInstitucionales = () => {
             color="border border-primary text-primary"
             onClick={() => {
               form.setValue('periodo_memoria', '');
-              setParams('');
+              setParams('autorizado=1&activo=1');
               refetchMemoriasInstitucionales();
             }}
           >

@@ -136,7 +136,7 @@ const NormasEmitidas = () => {
               form.setValue('id_tipo_documento', '');
               form.setValue('periodo_resolucion', '');
               form.setValue('id_area', '');
-              setParams('');
+              setParams('autorizado=1&activo=1');
               refetchNormasEmitidas();
             }}
           >
